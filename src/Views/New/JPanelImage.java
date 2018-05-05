@@ -30,10 +30,12 @@ public class JPanelImage extends JPanel {
         super.paintComponent(g);
         try {
             BufferedImage bImage = ImageIO.read(new File( image));
+            BufferedImage jImage ;
             g.drawImage(bImage, 2, 2, (int) getSize().getWidth(), (int) getSize().getHeight(), this);
-            for (Joueur j:
-                 joueurs) {
-                g.drawImage(bImage,(int) getSize().getWidth(), (int) getSize().getHeight(),30,30, this);
+           for(int k=0;k<joueurs.size();k++) {
+                jImage= ImageIO.read(new File(Graphiques.Pions[joueurs.get(k).getId()]));
+                System.out.println("Affichage des joueurs ");
+                g.drawImage(jImage,(int) getSize().getWidth()/3+33*k, (int) getSize().getHeight()/2,30,45, this);
             }
         } catch (IOException e) {
             e.printStackTrace();

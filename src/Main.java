@@ -21,7 +21,8 @@ public class Main {
         listeJ.add(new Joueur("Zineb",null));
         partieController.initialiserPartie(listeJ);
         partieController.positionnerJoueurs(listeJ.get(0),2,2);
-        
+        partieController.positionnerJoueurs(listeJ.get(1),2,2);
+        partieController.positionnerJoueurs(listeJ.get(0),1,1);
         JFrame main= new JFrame();
         main.add(partieController.getZoneView(),BorderLayout.CENTER);
         main.setSize(new Dimension(1000,1000));

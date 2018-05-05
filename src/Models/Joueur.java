@@ -11,7 +11,10 @@ public class Joueur {
     private HashMap<ElementArtefact,ArrayList<Cle>> cles ;
     private ArrayList<Artefact> artefacts;
 
+    static int idsJoueurs=1;
+
     public Joueur(String pseudo, Zone position) {
+        this.id=idsJoueurs++;
         this.pseudo = pseudo;
         this.position = position;
         cles=new HashMap<>();
@@ -45,6 +48,10 @@ public class Joueur {
     }
     public void setPosition(Zone position){
         this.position=position;
+    }
+
+    public int getId() {
+        return id;
     }
 }
 

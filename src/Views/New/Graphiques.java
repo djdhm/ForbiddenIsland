@@ -77,6 +77,14 @@ public class Graphiques {
                 "./res/images/zones/Breakers Bridge@2x.png"
             }
     };
+
+    public static final String[] Pions={
+        "./res/images/pion/Diver_Adventurer_Icon@2x.png",
+        "./res/images/pion/Engineer_Adventurer_Icon@2x.png"    ,
+        "./res/images/pion/Explorer_Adventurer_Icon@2x.png"    ,
+        "./res/images/pion/Messenger_Adventurer_Icon@2x.png",
+        "./res/images/pion/Navigator_Adventurer_Icon@2x.png"
+    };
     // Pawns
 //    private static PawnComponent DIVER;
 //    private static PawnComponent EXPLORER;
