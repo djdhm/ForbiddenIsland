@@ -3,7 +3,10 @@ package Models;
 public class Zone {
 
     private EtatZone situationZone;
+    public Zone(){
+        this.situationZone= EtatZone.NORMAL;
 
+    }
 
     public EtatZone getSituationZone(){
         return this.situationZone;

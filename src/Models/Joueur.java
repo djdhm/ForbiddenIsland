@@ -43,5 +43,8 @@ public class Joueur {
     public Zone getPosition() {
         return position;
     }
+    public void setPosition(Zone position){
+        this.position=position;
+    }
 }
 
