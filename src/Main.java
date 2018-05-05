@@ -19,9 +19,13 @@ public class Main {
         ArrayList<Joueur> listeJ=new ArrayList<>();
         listeJ.add(new Joueur("Djamel",null));
         listeJ.add(new Joueur("Zineb",null));
+        listeJ.add(new Joueur("Dahmane",null));
+        listeJ.add(new Joueur("Test",null));
         partieController.initialiserPartie(listeJ);
         partieController.positionnerJoueurs(listeJ.get(0),2,2);
         partieController.positionnerJoueurs(listeJ.get(1),2,2);
+        partieController.positionnerJoueurs(listeJ.get(2),2,2);
+        partieController.positionnerJoueurs(listeJ.get(3),2,2);
         partieController.positionnerJoueurs(listeJ.get(0),1,1);
         JFrame main= new JFrame();
         main.add(partieController.getZoneView(),BorderLayout.CENTER);
