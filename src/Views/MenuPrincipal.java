@@ -16,7 +16,7 @@ public class MenuPrincipal extends  JFrame{
     public MenuPrincipal(){
         super();
         menu=new JPanelMenu();
-
+        menu.setBackground(Color.green);
         main=new JPanel(new CardLayout());
         main.add(menu,"menu");
         main.add(background,"test");
@@ -25,6 +25,9 @@ public class MenuPrincipal extends  JFrame{
     public void initSize(){
         this.main.setSize(1000,1000);
         this.add(main);
+
+    }
+    public void afficherTutorial(){
 
     }
 
