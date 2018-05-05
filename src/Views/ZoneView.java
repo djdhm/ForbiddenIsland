@@ -41,11 +41,8 @@ public class ZoneView extends JPanel {
         }
     }
     public void innonderZone(int x,int y){
-        this.listeZones[x][y]=new JPanelImage("./res/images/zones/Breakers Bridge_flood@2x.png");
-        this.remove(x*6+y);
-        this.add(listeZones[x][y],x*6+y);
-        this.repaint();
-    }
+            listeZones[x][y].innonderZone(Graphiques.ImageZoneInnonder[x][y]);
+        }
 
     public void selectionZone(int x,int y){
 
@@ -60,4 +57,6 @@ public class ZoneView extends JPanel {
             listeZones[x][y].ajouterJoueur(j);
 
     }
+
+
 }

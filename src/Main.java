@@ -27,6 +27,8 @@ public class Main {
         partieController.positionnerJoueurs(listeJ.get(2),2,2);
         partieController.positionnerJoueurs(listeJ.get(3),2,2);
         partieController.positionnerJoueurs(listeJ.get(0),1,1);
+        partieController.selectionZone(2,2);
+        partieController.innonderZone(1,2);
         JFrame main= new JFrame();
         main.add(partieController.getZoneView(),BorderLayout.CENTER);
         main.setSize(new Dimension(1000,1000));

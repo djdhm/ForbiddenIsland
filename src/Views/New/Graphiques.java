@@ -77,6 +77,56 @@ public class Graphiques {
                 "./res/images/zones/Breakers Bridge@2x.png"
             }
     };
+    public static final String [][] ImageZoneInnonder={
+            {
+                    "./res/images/zones/Breakers Bridge_flood@2x.png",
+                    "./res/images/zones/Bronze Gate_flood@2x.png",
+                    "./res/images/zones/Cave of Embers_flood@2x.png",
+                    "./res/images/zones/Cave of Shadows_flood@2x.png",
+                    "./res/images/zones/Cliffs of Abandon_flood@2x.png",
+                    "./res/images/zones/Copper Gate_flood@2x.png"
+            },  {
+            "./res/images/zones/Coral Palace_flood@2x.png",
+            "./res/images/zones/Crimson Forest_flood@2x.png",
+            "./res/images/zones/Dunes of Deception_flood@2x.png",
+            "./res/images/zones/Fools' Landing_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png"
+    },  {
+            "./res/images/zones/Gold Gate_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png"
+    },  {
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png"
+    },  {
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png"
+    },  {
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Breakers Bridge_flood@2x.png"
+    }
+    };
+
+
+
+    //
+
 
     public static final String[] Pions={
         "./res/images/pion/Diver_Adventurer_Icon@2x.png",

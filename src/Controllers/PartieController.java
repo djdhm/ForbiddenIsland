@@ -4,6 +4,7 @@ import Models.Joueur;
 import Models.Partie;
 import Views.ZoneView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PartieController {
@@ -27,5 +28,13 @@ public class PartieController {
         this.partie.deplacerJoueur(j,x,y);
         this.zoneView.positionnerJoueur(j,x,y);
 
+    }
+
+    public void selectionZone(int x,int y){
+        this.zoneView.selectionZone(x,y);
+
+    }
+    public void innonderZone(int x,int y){
+        zoneView.innonderZone(x,y);
     }
 }

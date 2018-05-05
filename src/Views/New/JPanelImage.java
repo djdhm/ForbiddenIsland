@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 
 public class JPanelImage extends JPanel {
-    String image;
+    private String image;
     ArrayList<Joueur> joueurs;
     public JPanelImage(String path)
     {
@@ -47,4 +47,9 @@ public class JPanelImage extends JPanel {
         this.joueurs.add(j);
         this.repaint();
     }
+    public void innonderZone(String path){
+        image=path;
+        this.repaint();
+    }
+
 }
