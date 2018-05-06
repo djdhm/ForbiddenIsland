@@ -4,10 +4,8 @@ import Views.New.JPanelImage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
+import java.beans.PropertyChangeListener;
 
 public class TutorialMenu extends JPanel {
     CardLayout pages;
@@ -23,6 +21,7 @@ public class TutorialMenu extends JPanel {
 
     public TutorialMenu(){
         super();
+        setFocusable(true);
         pages=new CardLayout();
         setLayout(pages);
         setPreferredSize(new Dimension(450,600));
@@ -42,51 +41,47 @@ public class TutorialMenu extends JPanel {
 
 
     }
-    TutorialMenu  getElement(){
-        return this;
-    }
-    private MouseListener eventHandler=new MouseListener() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            if(indice==9){
-                indice=0;
-            }
-            pages.show(getElement(),"page"+(indice++));
 
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-    };
     private void initialiserEvenement(){
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
 
-        page1.addMouseListener(eventHandler);
-        page2.addMouseListener(eventHandler);
-        page3.addMouseListener(eventHandler);
-        page4.addMouseListener(eventHandler);
-        page5.addMouseListener(eventHandler);
-        page6.addMouseListener(eventHandler);
-        page7.addMouseListener(eventHandler);
-        page8.addMouseListener(eventHandler);
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                System.out.println("TestClavier"+e.getKeyCode());
+                switch (e.getKeyCode()){
+                    case 39:
+                        pageSuivante();
+                        break;
+                    case 37:
+                        pagePrecedente();
+                        break;
+
+                }
+            }
+        });
+
+
+
     }
 
 
+    private  void pageSuivante(){
+        if(indice<8){
+            pages.show(this,"page"+(++indice));
+        }
+    }
 
+    private  void pagePrecedente(){
+        if(indice!=1){
+            pages.show(this,"page"+(--indice));
+        }
+    }
 }

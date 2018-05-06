@@ -37,4 +37,5 @@ public class PartieController {
     public void innonderZone(int x,int y){
         zoneView.innonderZone(x,y);
     }
+
 }
