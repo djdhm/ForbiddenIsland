@@ -1,8 +1,6 @@
 package Views;
 
-import Models.Cle;
-import Models.Grille;
-import Models.Joueur;
+import Models.*;
 import TP.Observer;
 import Views.New.CleView;
 import Views.New.Graphiques;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 public class ZoneView extends JPanel implements Observer{
 
     private Grille zones;
-
+    private boolean isSelected;
     private GridLayout grille=new GridLayout(6,6,10,10);
     private JPanelImage[][] listeZones;
     public ZoneView(){
@@ -31,10 +29,16 @@ public class ZoneView extends JPanel implements Observer{
 
 
     public void loadZones(Grille grille){
+        Zone zone;
         for(int i=0;i<6;i++){
             for(int j=0;j<6;j++){
-                if(grille.getZone(i,j)!=null){
-                    JPanelImage image=new JPanelImage(Graphiques.ImageZone[i][j]);
+                zone=grille.getZone(i,j);
+                if(zone!=null){
+                    zone.addObserver(this);
+                    JPanelImage image=new JPanelImage(zone.getImageSituation(i,j));
+                    if(zone instanceof AssocieElement){
+                        image.setArtefact(((AssocieElement) zone).getElement());
+                    }
                     listeZones[i][j]=image;
                     this.add(image);
                 }else{
@@ -62,12 +66,29 @@ public class ZoneView extends JPanel implements Observer{
 
     public void positionnerJoueur(Joueur j,int x,int y){
             listeZones[x][y].ajouterJoueur(j);
+    }
 
+    public void retirerJoueur(Joueur j ,int x,int y){
+        if(x>0 && y>0){
+            listeZones[x][y].retirerJoueur(j);
+            System.out.println("Kayen le joueur");
+
+        }
     }
 
 
     @Override
     public void update() {
+        this.removeAll();
+        System.out.println("Mise a jour des images ");
         this.loadZones(zones);
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

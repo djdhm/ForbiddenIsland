@@ -13,12 +13,17 @@ public class VuePaquet extends JPanel {
     private  JPanelImage image;
     private  JTextPane text;
     public VuePaquet(PaquetCarte paquetCarte){
+
+
         this.paquetCarte=paquetCarte;
-        setLayout(new GridLayout(2,1,15,5));
+
+        setLayout(new GridLayout(2,1,15,20));
 
         image=new JPanelImage(VuePaquet.getImagePath(paquetCarte,false));
         text=new JTextPane();
+
         text.setText(getText(paquetCarte));
+
         add(image);
         add(text);
 

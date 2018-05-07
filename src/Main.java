@@ -16,13 +16,14 @@ public class Main {
 
     public static void main(String[] argc){
 
-      PartieController partieController=new PartieController();
+//      PartieController partieController=new PartieController();
        ArrayList<Joueur> listeJ=new ArrayList<>();
         listeJ.add(new Joueur("Djamel",null));
         listeJ.add(new Joueur("Zineb",null));
         listeJ.add(new Joueur("Dahmane",null));
         listeJ.add(new Joueur("Test",null));
-       Partie partie= partieController.initialiserPartie(listeJ);
+       Partie partie= new Partie(listeJ);
+
 //        partieController.positionnerJoueurs(listeJ.get(0),2,2);
 //        partieController.positionnerJoueurs(listeJ.get(1),2,2);
 //        partieController.positionnerJoueurs(listeJ.get(2),2,2);
@@ -35,6 +36,7 @@ public class Main {
         JFrame main= new JFrame();
         Board board=new Board();
         board.initialiserPartie(partie);
+
         main.add(board);
         main.setSize(new Dimension(1000,1000));
         main.setResizable(true);

@@ -5,21 +5,28 @@ import Models.Partie;
 import Models.Zone;
 import Views.Board;
 import Views.New.CleView;
+import Views.New.DregerButton;
 import Views.ZoneView;
 
+import javax.swing.text.View;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class PartieController {
+public class PartieController implements ActionListener {
 
     Partie partie;
     Board plateau;
     ZoneView zoneView;
+    public  PartieController(Partie partie,Board board){
+            this.partie=partie;
+            this.plateau=board;
+            this.partie.addObserver(plateau);
+    }
     public Partie initialiserPartie(ArrayList<Joueur> joueurs){
-        zoneView=new ZoneView();
-        zoneView=plateau.getZone();
-        partie=new Partie(joueurs);
         partie.initialiserPartie();
+        zoneView=new ZoneView();
         zoneView.loadZones(partie.getGrille());
         return partie;
     }
@@ -42,4 +49,21 @@ public class PartieController {
         zoneView.innonderZone(x,y);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String source=((DregerButton)e.getSource()).getText();
+        System.out.println(source);
+
+        switch (source){
+            case "FIN DE TOUR":
+                System.out.println("Fin tour de jouer ");
+                this.partie.tourSuivant();
+            break;
+            case "SE DEPLACER":
+                System.out.println("Se deplacer");
+                this.partie.decNombreAction();
+                this.partie.getJoueurActuel().setPosition(partie.getGrille().getZone(3,3));
+                break;
+        }
+    }
 }

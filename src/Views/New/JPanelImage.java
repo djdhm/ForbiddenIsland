@@ -1,7 +1,9 @@
 package Views.New;
 
 
+import Models.Artefact;
 import Models.Joueur;
+import TP.Observer;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,9 +15,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 
-public class JPanelImage extends JPanel {
+public class JPanelImage extends JPanel implements Observer {
     private String image;
     ArrayList<Joueur> joueurs;
+    private Artefact artefact;
     public JPanelImage(String path)
     {
         super();
@@ -38,18 +41,43 @@ public class JPanelImage extends JPanel {
                 g.drawImage(jImage,32*(k%2), (int) getSize().getHeight()/2-40*(int)(k/2),28,40, this);
 
             }
+            if(artefact!=null){
+                jImage= ImageIO.read(new File("./res/images/tresors/"+artefact.getElementArtefact()+".png"));
+                System.out.println("Affichage des Tresors  ");
+                g.drawImage(jImage,60, 8,28,40, this);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void ajouterTresor(Tresor tresor){
+
     }
 
     public void ajouterJoueur(Joueur j) {
         this.joueurs.add(j);
         this.repaint();
     }
+    public void retirerJoueur(Joueur j){
+        System.out.println("Retirer un joueur ...");
+        this.joueurs.remove(j);
+        repaint();
+
+    }
     public void innonderZone(String path){
         image=path;
         this.repaint();
     }
 
+    public void setArtefact(Artefact artefact) {
+        this.artefact = artefact;
+        this.repaint();
+    }
+
+    @Override
+    public void update() {
+
+    }
 }

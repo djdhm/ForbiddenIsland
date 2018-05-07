@@ -1,6 +1,9 @@
 package Models;
 
-public class Zone {
+import TP.Observable;
+import Views.New.Graphiques;
+
+public class Zone extends Observable{
 
     private EtatZone situationZone;
     public Zone(){
@@ -14,10 +17,11 @@ public class Zone {
 
     public void setSituationZone(EtatZone etat){
         this.situationZone=etat;
+        notifyObservers();
     }
 
     public void innoderZone(){
-       situationZone=situationZone.getSuivant();
+       situationZone=situationZone.getSuivant(); notifyObservers();
     }
 
     public void  assecherZone(){
@@ -28,6 +32,20 @@ public class Zone {
         else{
             situationZone=EtatZone.NORMAL;
         }
+        notifyObservers();
+    }
+
+    public String getImageSituation(int i,int j){
+        // Affichage de la zone en etat normal
+        if(situationZone.equals(EtatZone.NORMAL)){
+            return Graphiques.ImageZone[i][j];
+        }
+        else if(situationZone.equals(EtatZone.INNONDE)){
+            return Graphiques.ImageZoneInnonder[i][j];
+        }
+        else{
+            return "./res/images/zones/extra/Tile_Flood_Water@2x.png";
+        }
     }
 
     @Override
@@ -35,4 +53,6 @@ public class Zone {
         return "Zone "+situationZone.toString();
 
     }
+
+
 }

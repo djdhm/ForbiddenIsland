@@ -2,6 +2,7 @@ package Models;
 
 import TP.Observable;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Grille extends Observable  {
@@ -18,14 +19,22 @@ public class Grille extends Observable  {
                 zones[i][j]=new Zone();
             }
         }
-        zones[0][2]=new Zone();
+
+        zones[2][1]=new Heliport();
         zones[0][3]=new Zone();
         zones[5][2]=new Zone();
         zones[5][3]=new Zone();
         zones[2][0]=new Zone();
-        zones[3][0]=new Zone();
         zones[2][5]=new Zone();
-        zones [3][5]=new Zone();
+        zones[3][5]=new Zone();
+        zones[0][2]=new AssocieElement(Artefact.getArtefactElement(ElementArtefact.FEU));
+        zones[3][0]=new AssocieElement(Artefact.getArtefactElement(ElementArtefact.AIR));
+        zones[2][2]=new AssocieElement(Artefact.getArtefactElement(ElementArtefact.TERRE));
+        zones[2][4]=new AssocieElement(Artefact.getArtefactElement(ElementArtefact.EAU));
+        zones[3][1]=new AssocieElement(Artefact.getArtefactElement(ElementArtefact.FEU));
+        zones[3][5]=new AssocieElement(Artefact.getArtefactElement(ElementArtefact.EAU));
+        zones[4][3]=new AssocieElement(Artefact.getArtefactElement(ElementArtefact.AIR));
+
 
     }
 
@@ -37,9 +46,30 @@ public class Grille extends Observable  {
         return zones[2][2];
     }
 
+    public ArrayList<Zone> getZoneAdjacentes(Zone zone){
+            ArrayList<Zone> zonesAdjacentes =new ArrayList<>();
+            Dimension position=chercherZone(zone);
+            if(position.width>0) zonesAdjacentes.add(zones[position.width-1][position.height]);
+            if(position.width<5) zonesAdjacentes.add(zones[position.width+1][position.height]);
+            if(position.height>0) zonesAdjacentes.add(zones[position.width][position.height-1]);
+            if(position.width<5) zonesAdjacentes.add(zones[position.width][position.height+1]);
+
+            return zonesAdjacentes;
+
+    }
 
 
-
+    public Dimension chercherZone(Zone zone){
+        for(int i=0;i<6;i++){
+            for(int j=0;j<6;j++){
+                if(this.zones[i][j]==zone){
+                    return new Dimension(i,j);
+                }
+            }
+        }
+        System.out.println("Zone introuvable...");
+        return new Dimension(0,0);
+    }
 
 
 }

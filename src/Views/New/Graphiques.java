@@ -34,23 +34,23 @@ public class Graphiques {
 
     public static final String [][] ImageZone={
             {
-                "./res/images/zones/Breakers Bridge@2x.png",
-                "./res/images/zones/Bronze Gate@2x.png",
+                "",
+                "",
                 "./res/images/zones/Cave of Embers@2x.png",
-                "./res/images/zones/Cave of Shadows@2x.png",
-                "./res/images/zones/Cliffs of Abandon@2x.png",
-                "./res/images/zones/Copper Gate@2x.png"
+                "./res/images/zones/Bronze Gate@2x.png",
+                "",
+                ""
             },  {
-                "./res/images/zones/Coral Palace@2x.png",
-                "./res/images/zones/Crimson Forest@2x.png",
-                "./res/images/zones/Dunes of Deception@2x.png",
-                "./res/images/zones/Fools' Landing@2x.png",
-                "./res/images/zones/Breakers Bridge@2x.png",
-                "./res/images/zones/Breakers Bridge@2x.png"
-            },  {
+                "",
+                "./res/images/zones/Twilight Hollow@2x.png",
+                "./res/images/zones/Phantom Rock@2x.png",
                 "./res/images/zones/Gold Gate@2x.png",
-                "./res/images/zones/Breakers Bridge@2x.png",
-                "./res/images/zones/Breakers Bridge@2x.png",
+                "./res/images/zones/Crimson Forest@2x.png",
+                "",
+            },  {
+                "./res/images/zones/Howling Garden@2x.png",
+                "./res/images/zones/Fools' Landing@2x.png",
+                "./res/images/zones/Temple of the Sun@2x.png",
                 "./res/images/zones/Breakers Bridge@2x.png",
                 "./res/images/zones/Breakers Bridge@2x.png",
                 "./res/images/zones/Breakers Bridge@2x.png"

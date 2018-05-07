@@ -30,6 +30,7 @@ public class InfoJoueur extends JPanel implements Observer {
 
     public InfoJoueur(boolean left, boolean top,Joueur joueur) {
         this.joueur=joueur;
+        this.joueur.addObserver(this);
         this.left = left;
         this.top = top;
         cles=new ArrayList<>();
@@ -182,14 +183,18 @@ public class InfoJoueur extends JPanel implements Observer {
     @Override
     public void update() {
         System.out.println("affichage et mise a jour ");
-        
         for (Cle cle:this.cles
              ) {
             ajouterCarte(cle);
         }
+        if(joueur.isTour()){
+            setBorder(Graphiques.ACTIVE_BORDER_SELECTED);
+        }else{
+            setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));        }
         this.repaint();
 
     }
+
 
 
     /**
