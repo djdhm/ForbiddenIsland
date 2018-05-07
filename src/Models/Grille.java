@@ -1,8 +1,10 @@
 package Models;
 
+import TP.Observable;
+
 import java.util.ArrayList;
 
-public class Grille {
+public class Grille extends Observable  {
 
     Zone[][] zones;
     PaquetRechercheCle paquetcle;
@@ -34,6 +36,8 @@ public class Grille {
     public Zone getHeliport(){
         return zones[2][2];
     }
+
+
 
 
 

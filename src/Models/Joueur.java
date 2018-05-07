@@ -1,5 +1,7 @@
 package Models;
 
+import Views.New.Tresor;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,8 +10,7 @@ public class Joueur {
     private int id;
     private String pseudo;
     private Zone position;
-    private HashMap<ElementArtefact,ArrayList<Cle>> cles ;
-    private ArrayList<Artefact> artefacts;
+    private InventaireJoueur inventaire;
 
     static int idsJoueurs=1;
 
@@ -17,28 +18,16 @@ public class Joueur {
         this.id=idsJoueurs++;
         this.pseudo = pseudo;
         this.position = position;
-        cles=new HashMap<>();
+        inventaire=new InventaireJoueur();
 
     }
 
     public void recevoirCle(Cle nouvelleCle){
-        ArrayList<Cle> listeCle = this.cles.get(nouvelleCle.getElementCle());
-        System.out.println("Le joueurs avait "+listeCle.size());
+        inventaire.ajouterCle(nouvelleCle);
 
-        if(listeCle ==null){
-            System.out.println("Premiere cle de type ..");
-            ArrayList<Cle> temp=new ArrayList<Cle>();
-            temp.add(nouvelleCle);
-            this.cles.put(nouvelleCle.getElementCle(),temp);
-
-
-        }else{
-            listeCle.add(nouvelleCle);
-            System.out.println("Le joueurs a maintenat "+listeCle.size());
-
-        }
-
-
+    }
+    public void recevoirTresor(ElementArtefact elementArtefact){
+        inventaire.ajouterTresor(elementArtefact);
     }
     public void monteEau(){
         position.innoderZone();

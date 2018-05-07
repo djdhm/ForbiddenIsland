@@ -1,7 +1,10 @@
 package Views;
 
+import Models.Cle;
 import Models.Grille;
 import Models.Joueur;
+import TP.Observer;
+import Views.New.CleView;
 import Views.New.Graphiques;
 import Views.New.JPanelImage;
 
@@ -9,13 +12,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ZoneView extends JPanel {
+public class ZoneView extends JPanel implements Observer{
+
+    private Grille zones;
 
     private GridLayout grille=new GridLayout(6,6,10,10);
     private JPanelImage[][] listeZones;
     public ZoneView(){
         super();
-
         this.setLayout(grille);
         listeZones=new JPanelImage[6][6];
         Dimension taille=new Dimension(660,660);
@@ -24,9 +28,8 @@ public class ZoneView extends JPanel {
         setMaximumSize(taille);
         this.setVisible(true);
     }
-    private void loadZones(){
 
-    }
+
     public void loadZones(Grille grille){
         for(int i=0;i<6;i++){
             for(int j=0;j<6;j++){
@@ -51,6 +54,10 @@ public class ZoneView extends JPanel {
         this.add(listeZones[x][y],x*6+y);
         this.repaint();
     }
+    public void ajouterCle(int pos,JPanelImage imageCle){
+        System.out.println("Ajout d'une cle au joueur : "+pos);
+
+    }
 
 
     public void positionnerJoueur(Joueur j,int x,int y){
@@ -59,4 +66,8 @@ public class ZoneView extends JPanel {
     }
 
 
+    @Override
+    public void update() {
+        this.loadZones(zones);
+    }
 }
