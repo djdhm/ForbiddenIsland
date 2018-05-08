@@ -3,6 +3,8 @@ package Views;
 import Views.New.JPanelImage;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeListener;
@@ -21,24 +23,29 @@ public class TutorialMenu extends JPanel {
 
     public TutorialMenu(){
         super();
+        setLayout(new BorderLayout());
         setFocusable(true);
+        JPanel centre=new JPanel();
         pages=new CardLayout();
-        setLayout(pages);
+        centre.setLayout(pages);
         setPreferredSize(new Dimension(300,600));
-        setMaximumSize(new Dimension(300,600));
-        setMinimumSize(new Dimension(300,600));
+        centre.setMaximumSize(new Dimension(300,600));
+        centre.setMinimumSize(new Dimension(300,600));
         indice=1;
-        add(page1,"page1");
-        add(page2,"page2");
-        add(page3,"page3");
-        add(page4,"page4");
-        add(page5,"page5");
-        add(page6,"page6");
-        add(page7,"page7");
-        add(page8,"page8");
-        pages.show(this,"page1");
+        centre.add(page1,"page1");
+        centre.add(page2,"page2");
+        centre.add(page3,"page3");
+        centre.add(page4,"page4");
+        centre.add(page5,"page5");
+        centre.add(page6,"page6");
+        centre.add(page7,"page7");
+        centre.add(page8,"page8");
+        pages.show(centre,"page1");
         initialiserEvenement();
-
+        add(centre, BorderLayout.CENTER);
+        add(new JPanel(),BorderLayout.EAST);
+        add(new JPanel(),BorderLayout.WEST);
+        centre.setBorder(new EmptyBorder(20,150,20,150));
 
     }
 
@@ -72,9 +79,43 @@ public class TutorialMenu extends JPanel {
 
 
 
+                    page1.addMouseListener(eventHandler);
+                    page2.addMouseListener(eventHandler);
+                    page3.addMouseListener(eventHandler);
+                    page4.addMouseListener(eventHandler);
+                    page5.addMouseListener(eventHandler);
+                    page6.addMouseListener(eventHandler);
+                    page7.addMouseListener(eventHandler);
+                    page8.addMouseListener(eventHandler);
+
     }
 
+    MouseListener eventHandler=new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            pageSuivante();
+        }
 
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    };
     private  void pageSuivante(){
         if(indice<8){
             pages.show(this,"page"+(++indice));

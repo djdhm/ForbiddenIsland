@@ -129,6 +129,24 @@ public class InfoJoueur extends JPanel implements Observer {
         } // end if
         treasure.add(tresor, gLCT);
     }// end
+
+    public void addTreasure(int num ) {
+        int nb = (treasure.getComponentCount()) % 2;
+        if (left && top) {
+            gLCT.gridx = nb;
+            gLCT.gridy = ((((treasure.getComponentCount() - nb) + 1) % 3) + 1) % 2;
+        } else if (!left && top) {
+            gLCT.gridx = (nb + 1) % 2;
+            gLCT.gridy = ((((treasure.getComponentCount() - nb) + 1) % 3) + 1) % 2;
+        } else if (left && !top) {
+            gLCT.gridx = nb;
+            gLCT.gridy = (((treasure.getComponentCount() - nb) + 1) % 3) % 2;
+        } else {
+            gLCT.gridx = (nb + 1) % 2;
+            gLCT.gridy = (((treasure.getComponentCount() - nb) + 1) % 3) % 2;
+        } // end if
+        treasure.add(new JPanelImage(Graphiques.Pions[num]), gLCT);
+    }// end
 //    // name
 //
 //
@@ -192,10 +210,8 @@ public class InfoJoueur extends JPanel implements Observer {
         for(int k=getComponentCount();k<joueur.getInventaire().getCles().size();k++){
             ajouterCarte(joueur.getInventaire().getCles().get(k));
         }
+        addTreasure(joueur.getId());
 
-        for(int k=getComponentCount();k<joueur.getInventaire().getTresors().size();k++){
-            addTreasure(new Tresor(joueur.getInventaire().getTresors().get(k)));
-        }
 
 
         if(joueur.isTour()){

@@ -212,6 +212,6 @@ public class Partie extends Observable {
            if(tresorTrouve.get(elementArtefact)==null){
                tresorTrouve.put(elementArtefact.getElement(),new Boolean(true));
            }
-         
+
     }
 }
