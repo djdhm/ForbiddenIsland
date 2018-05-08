@@ -52,10 +52,11 @@ public class Grille extends Observable   {
     public ArrayList<Zone> getZoneAdjacentes(Zone zone){
             ArrayList<Zone> zonesAdjacentes =new ArrayList<>();
             Dimension position=chercherZone(zone);
-            if(zones[position.width-1][position.height]!=null) zonesAdjacentes.add(zones[position.width-1][position.height]);
-            if(zones[position.width+1][position.height]!=null) zonesAdjacentes.add(zones[position.width+1][position.height]);
-            if(zones[position.width][position.height-1]!=null) zonesAdjacentes.add(zones[position.width][position.height-1]);
-            if(zones[position.width][position.height+1]!=null) zonesAdjacentes.add(zones[position.width][position.height+1]);
+
+            if( position.width>0 && zones[position.width-1][position.height]!=null) zonesAdjacentes.add(zones[position.width-1][position.height]);
+            if( position.width<5 &&zones[position.width+1][position.height]!=null) zonesAdjacentes.add(zones[position.width+1][position.height]);
+            if(position.height>0 &&zones[position.width][position.height-1]!=null) zonesAdjacentes.add(zones[position.width][position.height-1]);
+            if( position.height<5 && zones[position.width][position.height+1]!=null) zonesAdjacentes.add(zones[position.width][position.height+1]);
             zonesAdjacentes.removeIf(zone1 ->
                     {
                         return zone1.getSituationZone().equals(EtatZone.SUBMERGEE);

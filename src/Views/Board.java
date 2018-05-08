@@ -39,6 +39,7 @@ public class Board extends  JPanel implements Observer {
     private CleView zoneCle[];
     private VuePaquet paquetZones;
     private VuePaquet paquetCles;
+    private JTextPane infoTresor;
 
 
     public ZoneView getZone() {
@@ -49,11 +50,13 @@ public class Board extends  JPanel implements Observer {
         cadreJoueur=new InfoJoueur[4];
         tour=new JTextPane();
         infoJeu=new JTextPane();
+        infoTresor=new JTextPane();
         copyright=new JTextPane();
         tour.setEditable(false);
         infoJeu.setEditable(false);
         copyright.setEditable(false);
         tour.setBackground(new Color(0,0,0,10));
+        infoTresor.setBackground(new Color(0,0,0,5));
         infoJeu.setBackground(new Color(0,0,0,20));
         SimpleAttributeSet attribs = new SimpleAttributeSet();
         StyleConstants.setAlignment(attribs, StyleConstants.ALIGN_CENTER);
@@ -62,13 +65,14 @@ public class Board extends  JPanel implements Observer {
         tour.setParagraphAttributes(attribs, true);
         infoJeu.setParagraphAttributes(attribs,true);
         copyright.setParagraphAttributes(attribs,true);
+        infoTresor.setParagraphAttributes(attribs,true);
         copyright.setText("Ce projet est realisé dans le cadre de TP ....");
 
         zoneCle=new CleView[4];
         ouest=new JPanel(new BorderLayout());
         est = new JPanel(new BorderLayout());
         sud=new JPanel(new BorderLayout());
-        nord=new JPanel(new GridLayout(2,1,5,5));
+        nord=new JPanel(new GridLayout(3,1,5,5));
         zone=new ZoneView(this.partie);
 
         vuePaquets =new JPanel(new GridLayout(2,1,15,0));
@@ -111,6 +115,7 @@ public class Board extends  JPanel implements Observer {
         est.add(listAction,BorderLayout.CENTER);
         //ajout des zone de cle
         //Ajout des zones D'informations (Tour et nombre Action ) et INFO
+        nord.add(infoTresor);
         nord.add(infoJeu);
         nord.add(tour);
         sud.add(copyright,BorderLayout.CENTER);
@@ -182,6 +187,7 @@ public class Board extends  JPanel implements Observer {
     public void update() {
         // Mise a jour de l'affichage de la fenetre de la partie
 
+        this.infoTresor.setText("Vous avez rassemblez  "+this.partie.getNombreTresors() + " Tresors Jusqu'a maintenant");
         this.infoJeu.setText("Il vous reste "+this.partie.getNombreAction()+" A jouer !   ");
         this.tour.setText("Tour de Joueur : "+this.partie.getNomJoueurActuel()+"     ");
         boolean resteActionTour=(this.partie.getNombreAction()!=0);

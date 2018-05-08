@@ -214,4 +214,8 @@ public class Partie extends Observable {
            }
 
     }
+
+    public int getNombreTresors() {
+        return tresorTrouve.keySet().size();
+    }
 }
