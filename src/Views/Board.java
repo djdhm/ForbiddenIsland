@@ -2,6 +2,7 @@ package Views;
 
 
 import Controllers.PartieController;
+import Controllers.ZoneController;
 import Models.*;
 import TP.Observer;
 import Views.New.*;
@@ -166,17 +167,18 @@ public class Board extends  JPanel implements Observer {
             listAction.getComponent(k).setEnabled(resteActionTour);
 
         }
+        // Recherche et coloriage des zones adjacentes a la case de joueur
+        // Pour la selection
         Dimension dim;
         for (Zone z:this.partie.getGrille().getZoneAdjacentes(this.partie.getJoueurActuel().getPosition())
              ) {
-            dim=this.partie.getGrille().chercherZone(z);
-            this.zone.selectionZone(dim.width,dim.height);
+            z.setTypeSelection(1);
         }
-        Dimension pos=this.partie.getGrille().chercherZone(this.partie.getJoueurActuel().getPosition());
-        Dimension ancienPos=this.partie.getGrille().chercherZone(this.partie.getJoueurActuel().getAnciennePosition());
-        System.out.println("Retirer le joueur ....a "+ancienPos.height+" "+ancienPos.width);
-        this.zone.retirerJoueur(partie.getJoueurActuel(),ancienPos.width,ancienPos.height);
-        this.zone.positionnerJoueur(partie.getJoueurActuel(),pos.width,pos.height);
+//        Dimension pos=this.partie.getGrille().chercherZone(this.partie.getJoueurActuel().getPosition());
+//        Dimension ancienPos=this.partie.getGrille().chercherZone(this.partie.getJoueurActuel().getAnciennePosition());
+//        System.out.println("Retirer le joueur ....a "+ancienPos.height+" "+ancienPos.width);
+//        this.zone.retirerJoueur(partie.getJoueurActuel(),ancienPos.width,ancienPos.height);
+//        this.zone.positionnerJoueur(partie.getJoueurActuel(),pos.width,pos.height);
 
         repaint();
     }

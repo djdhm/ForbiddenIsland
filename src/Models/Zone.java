@@ -6,9 +6,10 @@ import Views.New.Graphiques;
 public class Zone extends Observable{
 
     private EtatZone situationZone;
+    private int typeSelection;
     public Zone(){
         this.situationZone= EtatZone.NORMAL;
-
+        this.typeSelection=0;
     }
 
     public EtatZone getSituationZone(){
@@ -55,4 +56,11 @@ public class Zone extends Observable{
     }
 
 
+    public int getTypeSelection() {
+        return typeSelection;
+    }
+
+    public void setTypeSelection(int typeSelection) {
+        this.typeSelection = typeSelection;
+    }
 }

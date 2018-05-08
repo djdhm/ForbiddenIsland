@@ -3,9 +3,12 @@ package Views.New;
 
 import Models.Artefact;
 import Models.Joueur;
+import Models.Zone;
 import TP.Observer;
+import sun.java2d.loops.FillRect;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +20,10 @@ import javax.swing.JPanel;
 
 public class JPanelImage extends JPanel implements Observer {
     private String image;
+    private Zone zone;
     ArrayList<Joueur> joueurs;
     private Artefact artefact;
+    private MouseListener mouseListener;
     public JPanelImage(String path)
     {
         super();
@@ -26,7 +31,14 @@ public class JPanelImage extends JPanel implements Observer {
         this.setSize(new Dimension(200,200));
         this.image=path;
     }
-
+    public JPanelImage(Zone zone,String path){
+        super();
+        joueurs=new ArrayList<>();
+        this.setSize(new Dimension(200,200));
+        this.image=path;
+        this.zone=zone;
+        zone.addObserver(this);
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -46,7 +58,23 @@ public class JPanelImage extends JPanel implements Observer {
                 System.out.println("Affichage des Tresors  ");
                 g.drawImage(jImage,60, 8,28,40, this);
             }
+            if(zone!=null){
 
+               switch (zone.getTypeSelection()){
+                   case 0:
+                       setBorder(Graphiques.INACTIVE_BORDER);
+                    break;
+                   case 1:
+                       setBorder(Graphiques.ACTIVE_BORDER_SELECTED);
+                       break;
+                   case 2:
+                       setBorder(Graphiques.ACTIVE_BORDER_SHORE_HOVER);
+                       break;
+
+               }
+
+
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,6 +106,13 @@ public class JPanelImage extends JPanel implements Observer {
 
     @Override
     public void update() {
+        repaint();
+    }
 
+
+
+    public void ajouterListenerSouris(MouseListener mouseListener) {
+        this.mouseListener = mouseListener;
+        this.addMouseListener(mouseListener);
     }
 }

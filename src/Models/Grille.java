@@ -68,7 +68,7 @@ public class Grille extends Observable  {
             }
         }
         System.out.println("Zone introuvable...");
-        return new Dimension(0,0);
+        return null;
     }
 
 

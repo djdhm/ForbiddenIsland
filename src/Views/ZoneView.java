@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.ZoneController;
 import Models.*;
 import TP.Observer;
 import Views.New.CleView;
@@ -8,12 +9,14 @@ import Views.New.JPanelImage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class ZoneView extends JPanel implements Observer{
 
     private Grille zones;
     private boolean isSelected;
+    private MouseListener mouseListener;
     private GridLayout grille=new GridLayout(6,6,10,10);
     private JPanelImage[][] listeZones;
     public ZoneView(){
@@ -35,11 +38,12 @@ public class ZoneView extends JPanel implements Observer{
                 zone=grille.getZone(i,j);
                 if(zone!=null){
                     zone.addObserver(this);
-                    JPanelImage image=new JPanelImage(zone.getImageSituation(i,j));
+                    JPanelImage image=new JPanelImage(zone,zone.getImageSituation(i,j));
                     if(zone instanceof AssocieElement){
                         image.setArtefact(((AssocieElement) zone).getElement());
                     }
                     listeZones[i][j]=image;
+                    new ZoneController(image,zone);
                     this.add(image);
                 }else{
                     this.add(new JPanel());
@@ -53,9 +57,8 @@ public class ZoneView extends JPanel implements Observer{
 
     public void selectionZone(int x,int y){
 
-        this.listeZones[x][y].setBorder(Graphiques.ACTIVE_BORDER_SELECTED);
-        this.remove(x*6+y);
-        this.add(listeZones[x][y],x*6+y);
+//        this.listeZones[x][y].setTypeSelection(1);
+        // Selection pour deplacement
         this.repaint();
     }
     public void ajouterCle(int pos,JPanelImage imageCle){
@@ -90,5 +93,9 @@ public class ZoneView extends JPanel implements Observer{
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public void setMouseListener(MouseListener mouseListener) {
+        this.mouseListener = mouseListener;
     }
 }

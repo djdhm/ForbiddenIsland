@@ -52,6 +52,13 @@ public class Partie extends Observable {
     }
 
     public void  tourSuivant(){
+        for(Zone e:        grille.getZoneAdjacentes(joueurActuel.getPosition())){
+            System.out.println("Changement d'etat de la celule vers non selectionne"+e);
+            if(e!=null){
+                e.setTypeSelection(0);
+
+            }
+        }
         this.actionRestantes=3;
         joueurActuel.setTour(false);
         joueurActuel=joueurs.get((joueurs.indexOf(joueurActuel)+1)%joueurs.size());
