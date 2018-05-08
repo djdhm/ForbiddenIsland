@@ -36,6 +36,7 @@ public class Partie extends Observable {
         grille=new Grille();
         this.joueurs= joueurs;
         this.joueurActuel=this.joueurs.get(0);
+        joueurActuel.recevoirCle(new Cle(ElementArtefact.FEU));
         this.paquqetCarteCle=new PaquetRechercheCle();
         this.paquetCarteZone=new PaquetCarteZone();
 
@@ -64,6 +65,7 @@ public class Partie extends Observable {
         joueurActuel.setTour(false);
         joueurActuel=joueurs.get((joueurs.indexOf(joueurActuel)+1)%joueurs.size());
         joueurActuel.setTour(true);
+        joueurActuel.getInventaire().ajouterCle(new Cle(ElementArtefact.FEU));
         notifyObservers();
     }
 
@@ -146,6 +148,9 @@ public class Partie extends Observable {
 
     public void selectionnerCarteZone() {
         this.paquetCarteZone.basculerSelection();
+    }
+    public void selectionnerCarteCle(){
+        this.paquqetCarteCle.basculerSelection();
     }
 
     public PaquetCarteZone getPaquetCarteZone() {

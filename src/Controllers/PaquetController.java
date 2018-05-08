@@ -1,61 +1,130 @@
 package Controllers;
 
-import Models.Carte;
-import Models.PaquetCarte;
-import Models.Partie;
+import Models.*;
+import Views.New.Graphiques;
+import Views.New.JPanelImage;
 import Views.New.VuePaquet;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class PaquetController  implements MouseListener{
-    private VuePaquet vuePaquet;
-    private PaquetCarte paquetCarte;
-    private Partie partie;
-    public PaquetController(PaquetCarte paquetCarte, VuePaquet vuePaquet, Partie partie){
-        this.vuePaquet=vuePaquet;
-        this.paquetCarte=paquetCarte;
-        this.partie = partie;
-        this.paquetCarte.addObserver(this.vuePaquet);
-        vuePaquet.setPaquetCarte(paquetCarte);
-        vuePaquet.ajouterSourisListener(this);
+public class PaquetController  {
+//    private VuePaquet vuePaquet;
+//    private PaquetCarte paquetCarte;
+//    private Partie partie;
+//    public PaquetController(PaquetCarte paquetCarte, VuePaquet vuePaquet, Partie partie){
+//        this.vuePaquet=vuePaquet;
+//        this.paquetCarte=paquetCarte;
+//        this.partie = partie;
+//        this.paquetCarte.addObserver(this.vuePaquet);
+//        vuePaquet.setPaquetCarte(paquetCarte);
+//        vuePaquet.ajouterSourisListener(this);
+//
+//    }
 
+    VuePaquet paquetRechercheCle;
+    VuePaquet paquetCarteZone;
+    JPanel paquetVue;
+    Partie partie;
+    public PaquetController(JPanel vue,VuePaquet cartesZone,VuePaquet cartesCles, Partie partie){
+        this.paquetCarteZone=cartesZone;
+        this.paquetRechercheCle=cartesCles;
+
+        this.paquetCarteZone.ajouterSourisListener(this.listenerZones);
+        this.paquetRechercheCle.ajouterSourisListener(this.listenerCle);
+        this.partie=partie;
+        this.paquetVue=vue;
     }
 
 
+    private MouseListener listenerZones=new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            System.out.println("Je dois retirer une carte zone");
+            PaquetCarteZone cartesZone=partie.getPaquetCarteZone();
+            System.out.println("Nombre d'action est : "+cartesZone.getNombreCarteARetirer());
 
+            if(cartesZone.getNombreCarteARetirer()>0){
+                System.out.println("Nombre d'action dedans est : "+cartesZone.getNombreCarteARetirer());
 
+                if(cartesZone.getNombreCarteARetirer()==1){
+                    System.out.println("Vous avez fini");
+                    partie.selectionnerCarteCle();
+                }
+                cartesZone.tirerCarte().effetCarte(partie.getJoueurActuel());
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-            if(paquetCarte.getNombreCarteARetirer()>0){
-                System.out.println("Tirer Une Carte");
-                Carte carte =paquetCarte.tirerCarte();
+            }
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    };
+
+    private MouseListener listenerCle=new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            System.out.println("Je dois retirer une carte cle");
+            if(partie.getPaquqetCarteCle().getNombreCarteARetirer()>0){
+                Carte carte = partie.getPaquqetCarteCle().tirerCarte();
                 carte.effetCarte(partie.getJoueurActuel());
-
+                if(partie.getPaquqetCarteCle().getNombreCarteARetirer()==0){
+                    partie.tourSuivant();
+                }
             }
             else{
-                System.out.println("C bon vous avez fini");
+                System.out.println("Attendez un peu");
             }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    };
+
+    public void setListenerZones(MouseListener listenerZones) {
+        this.listenerZones = listenerZones;
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-
+    public MouseListener getListenerZones() {
+        return listenerZones;
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
+    public MouseListener getListenerCle() {
+        return listenerCle;
     }
 }

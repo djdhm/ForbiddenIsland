@@ -58,6 +58,7 @@ public class PartieController implements ActionListener {
             case "FIN DE TOUR":
                 System.out.println("Fin tour de jouer ...");
                 this.partie.selectionnerCarteZone();
+                ((DregerButton)e.getSource()).setEnabled(false);
             break;
             case "SE DEPLACER":
                 System.out.println("Se deplacer...");

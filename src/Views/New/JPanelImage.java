@@ -55,9 +55,9 @@ public class JPanelImage extends JPanel implements Observer {
             }
             if(artefact!=null){
                 jImage= ImageIO.read(new File("./res/images/tresors/"+artefact.getElementArtefact()+".png"));
-                System.out.println("Affichage des Tresors  ");
                 g.drawImage(jImage,60, 8,28,40, this);
             }
+
             if(zone!=null){
 
                switch (zone.getTypeSelection()){

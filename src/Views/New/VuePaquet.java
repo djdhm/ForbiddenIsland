@@ -8,6 +8,7 @@ import com.sun.corba.se.impl.orbutil.graph.Graph;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 
 public class VuePaquet extends JPanel implements Observer {
 
@@ -67,7 +68,7 @@ public class VuePaquet extends JPanel implements Observer {
         this.paquetCarte = paquetCarte;
     }
 
-    public void ajouterSourisListener(PaquetController paquetController) {
+    public void ajouterSourisListener(MouseListener paquetController) {
             this.addMouseListener(paquetController);
     }
 

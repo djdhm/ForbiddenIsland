@@ -11,7 +11,7 @@ public class InventaireJoueur  extends Observable{
 
 
     public InventaireJoueur(){
-
+        cles=new ArrayList<>();
     }
 
     public void ajouterCle( Cle cle ){
@@ -26,5 +26,13 @@ public class InventaireJoueur  extends Observable{
     public void retirerCle(Cle cle){
         this.cles.remove(cle);
         notifyObservers();
+    }
+
+    public ArrayList<Cle> getCles() {
+        return cles;
+    }
+
+    public ArrayList<ElementArtefact> getTresors() {
+        return tresors;
     }
 }

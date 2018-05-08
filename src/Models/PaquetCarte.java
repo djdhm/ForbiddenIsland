@@ -54,6 +54,7 @@ public abstract class PaquetCarte extends Observable {
         poserDansDefausse(carte);
         this.nombreCarteARetirer--;
         if(nombreCarteARetirer==0) this.basculerSelection();
+        if(this.cartes.size()==0) this.recupererDefausse();
         return carte;
 
     }

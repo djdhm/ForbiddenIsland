@@ -28,7 +28,7 @@ public class Board extends  JPanel implements Observer {
     JPanel nord;
     JPanel listAction;
     InfoJoueur cadreJoueur[];
-    private JPanel VuePaquets;
+    private JPanel vuePaquets;
     private CleView zoneCle[];
     private VuePaquet paquetZones;
     private VuePaquet paquetCles;
@@ -64,7 +64,7 @@ public class Board extends  JPanel implements Observer {
         nord=new JPanel(new GridLayout(2,1,5,5));
         zone=new ZoneView(this.partie);
 
-        VuePaquets =new JPanel(new GridLayout(2,1,15,0));
+        vuePaquets =new JPanel(new GridLayout(2,1,15,0));
 
 //        initAffichage();
 
@@ -105,7 +105,7 @@ public class Board extends  JPanel implements Observer {
         nord.add(tour);
         sud.add(copyright,BorderLayout.CENTER);
         // Ajout Des PAquets de cartes
-        ouest.add(VuePaquets,BorderLayout.CENTER);
+        ouest.add(vuePaquets,BorderLayout.CENTER);
         initialiserPaquet();
         ajouterJoueurs();
 
@@ -114,6 +114,7 @@ public class Board extends  JPanel implements Observer {
 
     public void initialiserPartie(Partie partie){
             this.partie=partie;
+          //  partie.addObserver(this);
             this.zone.setPartie(partie);
              controller=new PartieController(partie,this);
              initAffichage();
@@ -125,11 +126,12 @@ public class Board extends  JPanel implements Observer {
 
         paquetZones=new VuePaquet(this.partie.getPaquetCarteZone());
 
-        VuePaquets.add(paquetZones);
+        vuePaquets.add(paquetZones);
         paquetCles=new VuePaquet(this.partie.getPaquqetCarteCle());
-        VuePaquets.add(paquetCles);
-        new PaquetController(this.partie.getPaquetCarteZone(),paquetZones, partie);
-        new PaquetController(this.partie.getPaquqetCarteCle(),paquetCles, partie);
+        this.partie.getPaquetCarteZone().addObserver(paquetZones);
+        this.partie.getPaquqetCarteCle().addObserver(paquetCles);
+        vuePaquets.add(paquetCles);
+        new PaquetController(vuePaquets,paquetZones,paquetCles, partie);
 
 
 
@@ -144,6 +146,7 @@ public class Board extends  JPanel implements Observer {
         int i;
         for(i=0;i<listeJoueurs.size()&&i<4;i++){
             cadreJoueur[i]=new InfoJoueur(contraintesGauche[i],contraintesHaut[i],listeJoueurs.get(i));
+            listeJoueurs.get(i).getInventaire().addObserver(cadreJoueur[i]);
         }
 //        info.ajouterCarte(new Cle(ElementArtefact.TERRE));
 //        info.ajouterCarte(new Cle(ElementArtefact.TERRE));

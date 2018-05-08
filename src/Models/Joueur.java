@@ -27,7 +27,6 @@ public class Joueur extends Observable {
 
     public void recevoirCle(Cle nouvelleCle){
         inventaire.ajouterCle(nouvelleCle);
-        notifyObservers();
 
     }
     public void recevoirTresor(ElementArtefact elementArtefact){
@@ -47,7 +46,7 @@ public class Joueur extends Observable {
             this.position.removeJoueur(this);
         }
         this.position=position;
-        System.out.println("Affichage dans la case arrivé");
+        System.out.println("Affichage dans la case ");
         this.position.ajouterJoueur(this);
         notifyObservers();
     }
@@ -71,5 +70,9 @@ public class Joueur extends Observable {
 
     public Zone getAnciennePosition() {
         return anciennePosition;
+    }
+
+    public InventaireJoueur getInventaire() {
+        return inventaire;
     }
 }
