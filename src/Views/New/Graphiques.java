@@ -1,6 +1,4 @@
-/**
- *
- */
+
 package Views.New;
 import java.awt.Color;
 import java.util.Observer;
@@ -10,10 +8,6 @@ import javax.swing.border.Border;
 
 
 
-/**
- * @author nihil
- *
- */
 public class Graphiques {
     // borders
     public static final Border ACTIVE_BORDER_SELECTED = BorderFactory.createLineBorder(Color.GREEN, 5, true);
@@ -127,10 +121,6 @@ public class Graphiques {
     };
 
 
-
-    //
-
-
     public static final String[] Pions={
         "./res/images/pion/Diver_Adventurer_Icon@2x.png",
         "./res/images/pion/Engineer_Adventurer_Icon@2x.png"    ,
@@ -138,54 +128,5 @@ public class Graphiques {
         "./res/images/pion/Messenger_Adventurer_Icon@2x.png",
         "./res/images/pion/Navigator_Adventurer_Icon@2x.png"
     };
-    // Pawns
-//    private static PawnComponent DIVER;
-//    private static PawnComponent EXPLORER;
-//    private static PawnComponent ENGINEER;
-//    private static PawnComponent MESSENGER;
-//    private static PawnComponent PILOT;
-//    private static PawnComponent NAVIGATOR;
 
-
-    /**
-     * @author nihil
-     *
-     */
-//    public static void init(Observer obs) {
-//        DIVER = new PawnComponent(AdventurerType.DIVER, obs);
-//        EXPLORER = new PawnComponent(AdventurerType.EXPLORER, obs);
-//        ENGINEER = new PawnComponent(AdventurerType.ENGINEER, obs);
-//        MESSENGER = new PawnComponent(AdventurerType.MESSENGER, obs);
-//        PILOT = new PawnComponent(AdventurerType.PILOT, obs);
-//        NAVIGATOR = new PawnComponent(AdventurerType.NAVIGATOR, obs);
-//    }
-//
-//
-//    /**
-//     * @author nihil
-//     *
-//     */
-//    public static PawnComponent getPawn(AdventurerType adv) {
-//        switch (adv) {
-//            case DIVER:
-//                return DIVER;
-//            case ENGINEER:
-//                return ENGINEER;
-//
-//            case EXPLORER:
-//                return EXPLORER;
-//
-//            case MESSENGER:
-//                return MESSENGER;
-//
-//            case NAVIGATOR:
-//                return NAVIGATOR;
-//
-//            case PILOT:
-//                return PILOT;
-//
-//            default:
-//                return null;
-//        }// end switch
-//    }
 }

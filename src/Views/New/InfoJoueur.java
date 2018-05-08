@@ -1,5 +1,4 @@
 package Views.New;
-import Models.Carte;
 import Models.Cle;
 import Models.Joueur;
 import TP.Observer;
@@ -43,9 +42,7 @@ public class InfoJoueur extends JPanel implements Observer {
     }
 
 
-    /**
-     * @author nihil
-     */
+
     private void initTreasures() {
         treasure = new JPanel();
         GridBagLayout lT = new GridBagLayout();
@@ -67,14 +64,11 @@ public class InfoJoueur extends JPanel implements Observer {
         gLCT.weighty = 1;
         gLCT.fill = GridBagConstraints.BOTH;
 
-        gLCC.gridx = left ? 0 : 6; // 0 for left *...... inventories and 6 for right ......*
+        gLCC.gridx = left ? 0 : 6;
         add(treasure, gLCC);
     }
 
 
-    /**
-     * @author nihil
-     */
     private void initLayout() {
         GridBagLayout lT = new GridBagLayout();
         if (left) {
@@ -83,8 +77,7 @@ public class InfoJoueur extends JPanel implements Observer {
         } else {
             double[] nb = {0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.25};
             lT.columnWeights = nb;
-        } // end if
-        // to set the number of columns
+        }
         int[] nb2 = new int[7];
         lT.columnWidths = nb2;
         gLCC = new GridBagConstraints();
@@ -108,11 +101,9 @@ public class InfoJoueur extends JPanel implements Observer {
             cles.add(cle);
             gLCC.gridx = 6 - cles.size();
             add(new CarteCle(cle), gLCC);
-        } // end if
+        }
 
-    }// end
-    // addCard
-
+    }
 
     public void addTreasure(Tresor tresor) {
         int nb = (treasure.getComponentCount()) % 2;
@@ -146,54 +137,9 @@ public class InfoJoueur extends JPanel implements Observer {
         } else {
             gLCT.gridx = (nb + 1) % 2;
             gLCT.gridy = (((treasure.getComponentCount() - nb) + 1) % 3) % 2;
-        } // end if
+        }
         treasure.add(new JPanelImage(Graphiques.Pions[num]), gLCT);
-    }// end
-//    // name
-//
-//
-//    /**
-//     * @author nihil
-//     *
-//     * @param cardPlace
-//     * place of the card in the player inventory to remove
-//     */
-////    public void removeCard(int cardPlace) {
-////        if (left) {
-////            remove(cards.remove(cardPlace - 1));
-////            for (int i = cardPlace; i < cards.size(); i++) {
-////                remove(cards.get(i));
-////                gLCC.gridx = i + 1;
-////                add(cards.get(i).setCardPlace(i + 1), gLCC);
-////            } // end for
-////        } else {
-////            remove(cards.remove(5 - cardPlace));
-////            for (int i = cardPlace; i > 5 - cards.size(); i--) {
-////                remove(cards.get(5 - i));
-////                gLCC.gridx = i;
-////                add(cards.get(5 - i).setCardPlace(cardPlace - cards.size() + 1), gLCC);
-////            } // end for
-////        } // end if
-////        doLayout();
-////    }// end removeCard
-//
-//
-    /**
-     * @author nihil
-     *
-     */
-//    public PlayerCard getCard(int i) {
-//        return cards.get(left ? i - 1 : 5 - i);
-//    }
-//
-
-    /**
-     * @return the cards
-//     */
-//    public ArrayList<PlayerCard> getCards() {
-//        return cards;
-//    }
-//
+    }
 
     @Override
     public Dimension getPreferredSize() {
@@ -204,11 +150,7 @@ public class InfoJoueur extends JPanel implements Observer {
     public void update() {
         System.out.println("Mise a jour de info joueur");
         System.out.println("Nombre de composants :"+getComponents().length);
-//        removeAll();
-//       initLayout();
-//        initTreasures();
 
-        //ajouterCarte(joueur.getInventaire().getCles().get(joueur.getInventaire().getCles().size()-1));
         for(int k=getComponentCount();k<joueur.getInventaire().getCles().size();k++){
             ajouterCarte(joueur.getInventaire().getCles().get(k));
         }
@@ -225,16 +167,5 @@ public class InfoJoueur extends JPanel implements Observer {
 
     }
 
-
-
-    /**
-     * @author nihil
-//     *
-//     */
-//    public void addObs(Observer obs) {
-//        if (obs instanceof GameController) {
-//            this.obs = obs;
-//        } // end if
-//    }
 
 }
