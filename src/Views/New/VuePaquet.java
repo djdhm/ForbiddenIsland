@@ -1,22 +1,26 @@
 package Views.New;
 
+import Controllers.PaquetController;
 import Models.PaquetCarte;
 import Models.PaquetCarteZone;
+import TP.Observer;
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class VuePaquet extends JPanel {
+public class VuePaquet extends JPanel implements Observer {
 
 
     private PaquetCarte paquetCarte;
     private  JPanelImage image;
     private  JTextPane text;
+    private boolean selectionne;
     public VuePaquet(PaquetCarte paquetCarte){
 
 
         this.paquetCarte=paquetCarte;
-
+        selectionne=false;
         setLayout(new GridLayout(2,1,15,20));
 
         image=new JPanelImage(VuePaquet.getImagePath(paquetCarte,false));
@@ -61,6 +65,24 @@ public class VuePaquet extends JPanel {
 
     public void setPaquetCarte(PaquetCarte paquetCarte) {
         this.paquetCarte = paquetCarte;
+    }
+
+    public void ajouterSourisListener(PaquetController paquetController) {
+            this.addMouseListener(paquetController);
+    }
+
+    @Override
+    public void update() {
+        selectionne=!selectionne;
+        if(selectionne){
+            setBorder(Graphiques.ACTIVE_BORDER_SELECTED);
+            text.setText("Tirer une carte ...");
+
+        }else{
+            setBorder(Graphiques.INACTIVE_BORDER);
+
+        }
+
     }
 }
 

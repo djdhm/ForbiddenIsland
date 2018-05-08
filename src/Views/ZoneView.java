@@ -46,6 +46,7 @@ public class ZoneView extends JPanel implements Observer{
                         image.setArtefact(((AssocieElement) zone).getElement());
                     }
                     listeZones[i][j]=image;
+                    zone.addObserver(image);
                     new ZoneController(image,zone,partie);
                     this.add(image);
                 }else{
@@ -85,9 +86,10 @@ public class ZoneView extends JPanel implements Observer{
 
     @Override
     public void update() {
-       // this.removeAll();
         System.out.println("Mise a jour des images ");
-//        this.loadZones(zones);
+        this.removeAll();
+        loadZones(this.partie.getGrille());
+        repaint();
     }
 
     public boolean isSelected() {

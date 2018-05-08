@@ -4,8 +4,9 @@ import TP.Observable;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Grille extends Observable  {
+public class Grille extends Observable   {
 
     Zone[][] zones;
     PaquetRechercheCle paquetcle;
@@ -59,6 +60,8 @@ public class Grille extends Observable  {
     }
 
 
+
+
     public Dimension chercherZone(Zone zone){
         for(int i=0;i<6;i++){
             for(int j=0;j<6;j++){
@@ -70,6 +73,7 @@ public class Grille extends Observable  {
         System.out.println("Zone introuvable...");
         return null;
     }
+
 
 
 }

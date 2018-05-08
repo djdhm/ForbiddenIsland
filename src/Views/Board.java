@@ -1,8 +1,8 @@
 package Views;
 
 
+import Controllers.PaquetController;
 import Controllers.PartieController;
-import Controllers.ZoneController;
 import Models.*;
 import TP.Observer;
 import Views.New.*;
@@ -11,8 +11,6 @@ import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Board extends  JPanel implements Observer {
@@ -32,6 +30,8 @@ public class Board extends  JPanel implements Observer {
     InfoJoueur cadreJoueur[];
     private JPanel VuePaquets;
     private CleView zoneCle[];
+    private VuePaquet paquetZones;
+    private VuePaquet paquetCles;
 
 
     public ZoneView getZone() {
@@ -117,13 +117,21 @@ public class Board extends  JPanel implements Observer {
             this.zone.setPartie(partie);
              controller=new PartieController(partie,this);
              initAffichage();
-            partie.initialiserPartie();
+          //  partie.initialiserPartie();
             zone.loadZones(partie.getGrille());
             ajouterJoueurs();
     }
     private void initialiserPaquet(){
-        VuePaquets.add(new VuePaquet(new PaquetCarteZone()));
-        VuePaquets.add(new VuePaquet(new PaquetRechercheCle()));
+
+        paquetZones=new VuePaquet(this.partie.getPaquetCarteZone());
+
+        VuePaquets.add(paquetZones);
+        paquetCles=new VuePaquet(this.partie.getPaquqetCarteCle());
+        VuePaquets.add(paquetCles);
+        new PaquetController(this.partie.getPaquetCarteZone(),paquetZones, partie);
+        new PaquetController(this.partie.getPaquqetCarteCle(),paquetCles, partie);
+
+
 
     }
     public void ajouterJoueurs(){

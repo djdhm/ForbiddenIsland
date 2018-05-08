@@ -19,8 +19,8 @@ public class Partie extends Observable {
     private ArrayList<Joueur> joueurs;
     private Joueur joueurActuel;
     ArrayList<Joueur> joueursEnvoles;
-    PaquetRechercheCle paquqetCarteCle;
-    PaquetCarteZone paquetCarteZone;
+    private PaquetRechercheCle paquqetCarteCle;
+    private PaquetCarteZone paquetCarteZone;
 
 
     public Partie(Grille grille,ArrayList<Joueur> joueurs){
@@ -42,13 +42,14 @@ public class Partie extends Observable {
     }
     public void initialiserPartie(){
         grille.initialiserGrille();
-        paquetCarteZone.initialisationPaquet();
-        paquqetCarteCle.initialisationPaquet();
+        paquetCarteZone.initialisationPaquet(this);
+        paquqetCarteCle.initialisationPaquet(this);
         for (int i=0;i<this.joueurs.size();i++) {
             System.out.println(grille.getZone(PositionDepart[i].width,PositionDepart[i].height));
             joueurs.get(i).setPosition(grille.getZone(PositionDepart[i].width,PositionDepart[i].height));
         }
-
+        joueurActuel=joueurs.get(0);
+        this.actionRestantes=3;
 
     }
 
@@ -57,7 +58,6 @@ public class Partie extends Observable {
             System.out.println("Changement d'etat de la celule vers non selectionne"+e);
             if(e!=null){
                 e.setTypeSelection(0);
-
             }
         }
         this.actionRestantes=3;
@@ -114,6 +114,7 @@ public class Partie extends Observable {
     }
     public void decNombreAction(){
         this.actionRestantes--;
+
         notifyObservers();
     }
 
@@ -141,5 +142,17 @@ public class Partie extends Observable {
                 z.setTypeSelection(0);
             }
         }
+    }
+
+    public void selectionnerCarteZone() {
+        this.paquetCarteZone.basculerSelection();
+    }
+
+    public PaquetCarteZone getPaquetCarteZone() {
+        return paquetCarteZone;
+    }
+
+    public PaquetRechercheCle getPaquqetCarteCle() {
+        return paquqetCarteCle;
     }
 }

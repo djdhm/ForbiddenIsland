@@ -5,7 +5,7 @@ import java.util.Collections;
 public class PaquetRechercheCle extends PaquetCarte {
 
     @Override
-    public void initialisationPaquet() {
+    public void initialisationPaquet(Partie partie) {
             System.out.println("Preparer le paquet de carte de recherche cle");
 
             // Ajout des cartes sans effet

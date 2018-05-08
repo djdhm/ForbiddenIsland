@@ -26,7 +26,8 @@ public class Zone extends Observable{
     }
 
     public void innoderZone(){
-       situationZone=situationZone.getSuivant(); notifyObservers();
+       situationZone=situationZone.getSuivant();
+       notifyObservers();
     }
 
     public void  assecherZone(){

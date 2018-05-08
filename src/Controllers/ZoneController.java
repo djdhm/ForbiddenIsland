@@ -45,12 +45,15 @@ public class ZoneController implements ActionListener,MouseListener{
 //                }
                 case 1:
                     this.partie.deselectionnerZone();
-                     System.out.println("Pour deplacement");
+                    System.out.println("Pour deplacement");
                      System.out.println(partie);
                      this.partie.getJoueurActuel().setPosition(zone);
-                break;
+                     this.partie.decNombreAction();
+                    break;
                 case 2:
                     System.out.println("Pour Assechement");
+                    zone.assecherZone();
+                    this.partie.decNombreAction();
                 break;
 
             }

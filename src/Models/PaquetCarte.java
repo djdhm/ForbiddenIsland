@@ -1,17 +1,20 @@
 package Models;
 
+import TP.Observable;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Stack;
 
-public abstract class PaquetCarte {
+public abstract class PaquetCarte extends Observable {
     private Stack<Carte> cartes;
     private  Stack<Carte> defausse;
-
+    private boolean selection;
+    private int nombreCarteARetirer;
     public PaquetCarte(){
         cartes=new Stack<>();
         defausse=new Stack<>();
-
+        selection=false;
     }
 
     public void afficherInfo(){
@@ -49,12 +52,22 @@ public abstract class PaquetCarte {
     public Carte tirerCarte(){
         Carte carte=this.cartes.pop();
         poserDansDefausse(carte);
+        this.nombreCarteARetirer--;
+        if(nombreCarteARetirer==0) this.basculerSelection();
         return carte;
 
+    }
+    public void basculerSelection(){
+        this.selection=!this.selection;
+        if(selection) {nombreCarteARetirer=2;}
+        notifyObservers();
     }
     public void ajouterCarte(Carte carte){
         cartes.push(carte);
     }
-    abstract public void initialisationPaquet();
+    abstract public void initialisationPaquet(Partie partie);
 
+    public int getNombreCarteARetirer() {
+        return nombreCarteARetirer;
+    }
 }

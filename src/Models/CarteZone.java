@@ -9,7 +9,7 @@ public class CarteZone implements  Carte {
 
     @Override
     public void effetCarte(Joueur joueur) {
-        System.out.println("Effectuer innondation de zone ");
+        System.out.println("Effectuer innondation de zone "+joueur.getPseudo());
         System.out.println("La zone precedemment"+zone.toString());
         zone.innoderZone();
         System.out.println("La zone actuellement"+zone.toString());

@@ -57,7 +57,7 @@ public class PartieController implements ActionListener {
         switch (source){
             case "FIN DE TOUR":
                 System.out.println("Fin tour de jouer ...");
-                this.partie.tourSuivant();
+                this.partie.selectionnerCarteZone();
             break;
             case "SE DEPLACER":
                 System.out.println("Se deplacer...");

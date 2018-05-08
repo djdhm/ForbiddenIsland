@@ -23,7 +23,7 @@ public class Main {
         listeJ.add(new Joueur("Dahmane",null));
         listeJ.add(new Joueur("Test",null));
        Partie partie= new Partie(listeJ);
-
+        partie.initialiserPartie();
 //        partieController.positionnerJoueurs(listeJ.get(0),2,2);
 //        partieController.positionnerJoueurs(listeJ.get(1),2,2);
 //        partieController.positionnerJoueurs(listeJ.get(2),2,2);
