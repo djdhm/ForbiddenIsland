@@ -45,10 +45,7 @@ public class Partie extends Observable {
         grille.initialiserGrille();
         paquetCarteZone.initialisationPaquet(this);
         paquqetCarteCle.initialisationPaquet(this);
-        for (int i=0;i<this.joueurs.size();i++) {
-            System.out.println(grille.getZone(PositionDepart[i].width,PositionDepart[i].height));
-            joueurs.get(i).setPosition(grille.getZone(PositionDepart[i].width,PositionDepart[i].height));
-        }
+
         joueurActuel=joueurs.get(0);
         this.actionRestantes=3;
 

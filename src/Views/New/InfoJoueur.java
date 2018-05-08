@@ -183,6 +183,16 @@ public class InfoJoueur extends JPanel implements Observer {
     @Override
     public void update() {
         System.out.println("Mise a jour de info joueur");
+        System.out.println("Nombre de composants :"+getComponents().length);
+//        removeAll();
+//       initLayout();
+//        initTreasures();
+
+        //ajouterCarte(joueur.getInventaire().getCles().get(joueur.getInventaire().getCles().size()-1));
+        for(int k=getComponentCount()-1;k<joueur.getInventaire().getCles().size();k++){
+            ajouterCarte(joueur.getInventaire().getCles().get(k));
+        }
+
 
         if(joueur.isTour()){
             setBorder(Graphiques.ACTIVE_BORDER_SELECTED);

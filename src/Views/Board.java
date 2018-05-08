@@ -15,6 +15,13 @@ import java.util.ArrayList;
 
 public class Board extends  JPanel implements Observer {
 
+    static Dimension PositionDepart[]={
+            new Dimension(1,1),
+            new Dimension(1,4),
+            new Dimension(4,1),
+            new Dimension(4,4)
+    };
+
 
     PartieController controller;
     private Partie partie;
@@ -146,9 +153,9 @@ public class Board extends  JPanel implements Observer {
         int i;
         for(i=0;i<listeJoueurs.size()&&i<4;i++){
             cadreJoueur[i]=new InfoJoueur(contraintesGauche[i],contraintesHaut[i],listeJoueurs.get(i));
-            listeJoueurs.get(i).getInventaire().addObserver(cadreJoueur[i]);
+          //  listeJoueurs.get(i).getInventaire().addObserver(cadreJoueur[i]);
         }
-//        info.ajouterCarte(new Cle(ElementArtefact.TERRE));
+        cadreJoueur[0].ajouterCarte(new Cle(ElementArtefact.TERRE));
 //        info.ajouterCarte(new Cle(ElementArtefact.TERRE));
 //        info.ajouterCarte(new Cle(ElementArtefact.TERRE));
 //        info2.addTreasure(new Cle(ElementArtefact.EAU));
@@ -159,7 +166,10 @@ public class Board extends  JPanel implements Observer {
         ouest.add(cadreJoueur[2],BorderLayout.SOUTH);
         est.add(cadreJoueur[1],BorderLayout.NORTH);
         est.add(cadreJoueur[3],BorderLayout.SOUTH);
-
+        for (int l=0;l<partie.getJoueurs().size();l++) {
+            System.out.println(partie.getGrille().getZone(PositionDepart[l].width,PositionDepart[l].height));
+            this.partie.getJoueurs().get(l).setPosition(partie.getGrille().getZone(PositionDepart[l].width,PositionDepart[l].height));
+        }
 
     }
 

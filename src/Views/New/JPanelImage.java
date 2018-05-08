@@ -126,7 +126,7 @@ public class JPanelImage extends JPanel implements Observer {
 
     public void setImage(String path) {
         this.image=path;
-        System.out.println("J'ai change l'image selon la situation");
+        //System.out.println("J'ai change l'image selon la situation");
         repaint();
     }
 }

@@ -75,4 +75,15 @@ public class Joueur extends Observable {
     public InventaireJoueur getInventaire() {
         return inventaire;
     }
+
+    public boolean avoirToutesCles(Artefact element) {
+        int cpt=0;
+            for(Cle cle:inventaire.getCles()   ){
+                if(cle.getElementCle().equals(element))
+                {
+                    cpt++;
+                }
+            }
+            return cpt==4;
+    }
 }

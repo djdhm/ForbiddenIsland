@@ -1,8 +1,6 @@
 package Controllers;
 
-import Models.Joueur;
-import Models.Partie;
-import Models.Zone;
+import Models.*;
 import Views.Board;
 import Views.New.CleView;
 import Views.New.DregerButton;
@@ -53,21 +51,40 @@ public class PartieController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String source=((DregerButton)e.getSource()).getText();
         System.out.println(source);
+        if(partie.partieGagne()){
+
+        }
+        else if(partie.partiePerdu()){
+
+        }
 
         switch (source){
             case "FIN DE TOUR":
                 System.out.println("Fin tour de jouer ...");
                 this.partie.selectionnerCarteZone();
+                while(this.partie.getNombreAction()>0) this.partie.decNombreAction();
+                this.partie.deselectionnerZone();
                 ((DregerButton)e.getSource()).setEnabled(false);
             break;
             case "SE DEPLACER":
                 System.out.println("Se deplacer...");
-                this.partie.decNombreAction();
                 this.partie.entourerZoneDeplacement();
                 break;
             case "ASSECHER ZONE":
                 System.out.println("Assecher une zone ...");
                 this.partie.entourerZoneAssecher();
+                break;
+            case "RECUPERER TRESOR":
+                System.out.println("Recuperer un tresor ...");
+                Joueur j=this.partie.getJoueurActuel();
+                Artefact elementArtefact=((AssocieElement)j.getPosition()).getElement();
+                if(j.avoirToutesCles(elementArtefact)){
+                        j.recevoirTresor(elementArtefact.getElement());
+                    }
+                    break;
+            case "S'ENVOLER":
+                System.out.println("S'envoler ...");
+                break;
         }
     }
 }

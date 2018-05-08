@@ -25,7 +25,9 @@ public class Artefact {
 
 
 
-
+    public ElementArtefact getElement(){
+        return  elementArtefact;
+    }
     public String getElementArtefact() {
         return elementArtefact.toString();
     }

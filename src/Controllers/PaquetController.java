@@ -86,6 +86,7 @@ public class PaquetController  {
             if(partie.getPaquqetCarteCle().getNombreCarteARetirer()>0){
                 Carte carte = partie.getPaquqetCarteCle().tirerCarte();
                 carte.effetCarte(partie.getJoueurActuel());
+
                 if(partie.getPaquqetCarteCle().getNombreCarteARetirer()==0){
                     partie.tourSuivant();
                 }
