@@ -27,7 +27,11 @@ public abstract class Observable {
      */
     public void notifyObservers() {
         for(Observer o : observers) {
-            o.update();
+            System.out.println("Test Observer "+observers);
+
+            if(o!=null){
+                o.update();
+            }
         }
     }
 }

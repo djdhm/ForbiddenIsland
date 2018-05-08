@@ -34,6 +34,7 @@ public class ZoneView extends JPanel implements Observer{
 
 
     public void loadZones(Grille grille){
+        setVisible(false);
         Zone zone;
         for(int i=0;i<6;i++){
             for(int j=0;j<6;j++){
@@ -54,6 +55,28 @@ public class ZoneView extends JPanel implements Observer{
                 }
             }
         }
+        setVisible(true);
+    }
+    public void mettreaJjourZones(Grille grille){
+        setVisible(false);
+        Zone zone;
+        for(int i=0;i<6;i++){
+            for(int j=0;j<6;j++){
+                zone=grille.getZone(i,j);
+                if(zone!=null){
+
+                    JPanelImage image=new JPanelImage(zone,zone.getImageSituation(i,j));
+                    if(zone instanceof AssocieElement){
+                        image.setArtefact(((AssocieElement) zone).getElement());
+                    }
+                    listeZones[i][j]=image;
+//                    this.add(image);
+                }else{
+                    this.add(new JPanel());
+                }
+            }
+        }
+        setVisible(true);
     }
     public void innonderZone(int x,int y){
             listeZones[x][y].innonderZone(Graphiques.ImageZoneInnonder[x][y]);
@@ -88,8 +111,9 @@ public class ZoneView extends JPanel implements Observer{
     public void update() {
         System.out.println("Mise a jour des images ");
         this.removeAll();
-        loadZones(this.partie.getGrille());
-        repaint();
+       // loadZones(this.partie.getGrille());
+       // mettreaJjourZones(this.partie.getGrille());
+        //repaint();
     }
 
     public boolean isSelected() {

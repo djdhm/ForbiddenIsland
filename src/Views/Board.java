@@ -177,6 +177,7 @@ public class Board extends  JPanel implements Observer {
         this.infoJeu.setText("Il vous reste "+this.partie.getNombreAction()+" A jouer !");
         this.tour.setText("Tour de Joueur : "+this.partie.getNomJoueurActuel());
         boolean resteActionTour=(this.partie.getNombreAction()!=0);
+        listAction.getComponent(0).setEnabled(true);
         for(int k=1;k<listAction.getComponents().length;k++){
             listAction.getComponent(k).setEnabled(resteActionTour);
 
