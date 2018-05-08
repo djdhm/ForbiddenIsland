@@ -65,14 +65,15 @@ public class ZoneView extends JPanel implements Observer{
                 zone=grille.getZone(i,j);
                 if(zone!=null){
 
-                    JPanelImage image=new JPanelImage(zone,zone.getImageSituation(i,j));
+                    //JPanelImage image=new JPanelImage(zone,zone.getImageSituation(i,j));
+
+                    //listeZones[i][j]=image;
+                    listeZones[i][j].setImage(zone.getImageSituation(i,j));
                     if(zone instanceof AssocieElement){
-                        image.setArtefact(((AssocieElement) zone).getElement());
+                        listeZones[i][j].setArtefact(((AssocieElement) zone).getElement());
                     }
-                    listeZones[i][j]=image;
+
 //                    this.add(image);
-                }else{
-                    this.add(new JPanel());
                 }
             }
         }
@@ -110,9 +111,8 @@ public class ZoneView extends JPanel implements Observer{
     @Override
     public void update() {
         System.out.println("Mise a jour des images ");
-        this.removeAll();
        // loadZones(this.partie.getGrille());
-       // mettreaJjourZones(this.partie.getGrille());
+        mettreaJjourZones(this.partie.getGrille());
         //repaint();
     }
 

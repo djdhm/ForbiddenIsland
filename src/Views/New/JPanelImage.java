@@ -123,4 +123,10 @@ public class JPanelImage extends JPanel implements Observer {
         this.mouseListener = mouseListener;
         this.addMouseListener(mouseListener);
     }
+
+    public void setImage(String path) {
+        this.image=path;
+        System.out.println("J'ai change l'image selon la situation");
+        repaint();
+    }
 }
