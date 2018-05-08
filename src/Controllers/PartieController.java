@@ -52,13 +52,14 @@ public class PartieController implements ActionListener {
         String source=((DregerButton)e.getSource()).getText();
         System.out.println(source);
         if(partie.partieGagne()){
-
+                plateau.afficherMessageVictoire();
         }
         else if(partie.partiePerdu()){
-
+                plateau.afficherMessagePerte();
         }
 
         switch (source){
+
             case "FIN DE TOUR":
                 System.out.println("Fin tour de jouer ...");
                 this.partie.selectionnerCarteZone();
@@ -74,17 +75,30 @@ public class PartieController implements ActionListener {
                 System.out.println("Assecher une zone ...");
                 this.partie.entourerZoneAssecher();
                 break;
-            case "RECUPERER TRESOR":
+            case "RECUPERER UN TRESOR":
                 System.out.println("Recuperer un tresor ...");
                 Joueur j=this.partie.getJoueurActuel();
                 Artefact elementArtefact=((AssocieElement)j.getPosition()).getElement();
                 if(j.avoirToutesCles(elementArtefact)){
-                        j.recevoirTresor(elementArtefact.getElement());
-                    }
+                    ((AssocieElement)j.getPosition()).recupererTresor(j);
+                    System.out.println("Vous avez recuperer le tresor");
+
+                }else{
+                    System.out.println("Vous avez pas les cles necessaire");
+                }
                     break;
             case "S'ENVOLER":
                 System.out.println("S'envoler ...");
+                Joueur x=this.partie.getJoueurActuel();
+                if(x.getPosition() instanceof Heliport){
+                    x.setPosition(null);
+                    partie.envolerJoueur(x);
+                    this.partie.tourSuivant();
+                    this.partie.deselectionnerZone();
+
+                }
                 break;
+
         }
     }
 }

@@ -24,9 +24,9 @@ public class TutorialMenu extends JPanel {
         setFocusable(true);
         pages=new CardLayout();
         setLayout(pages);
-        setPreferredSize(new Dimension(450,600));
-        setMaximumSize(new Dimension(450,600));
-        setMinimumSize(new Dimension(450,600));
+        setPreferredSize(new Dimension(300,600));
+        setMaximumSize(new Dimension(300,600));
+        setMinimumSize(new Dimension(300,600));
         indice=1;
         add(page1,"page1");
         add(page2,"page2");
@@ -63,7 +63,9 @@ public class TutorialMenu extends JPanel {
                     case 37:
                         pagePrecedente();
                         break;
-
+                    case 27:
+                        System.exit(1);
+                        break;
                 }
             }
         });

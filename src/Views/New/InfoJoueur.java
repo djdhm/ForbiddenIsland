@@ -112,7 +112,7 @@ public class InfoJoueur extends JPanel implements Observer {
     // addCard
 
 
-    public void addTreasure(Cle cle) {
+    public void addTreasure(Tresor tresor) {
         int nb = (treasure.getComponentCount()) % 2;
         if (left && top) {
             gLCT.gridx = nb;
@@ -127,7 +127,7 @@ public class InfoJoueur extends JPanel implements Observer {
            gLCT.gridx = (nb + 1) % 2;
             gLCT.gridy = (((treasure.getComponentCount() - nb) + 1) % 3) % 2;
         } // end if
-        treasure.add(new Tresor(cle), gLCT);
+        treasure.add(tresor, gLCT);
     }// end
 //    // name
 //
@@ -189,8 +189,12 @@ public class InfoJoueur extends JPanel implements Observer {
 //        initTreasures();
 
         //ajouterCarte(joueur.getInventaire().getCles().get(joueur.getInventaire().getCles().size()-1));
-        for(int k=getComponentCount()-1;k<joueur.getInventaire().getCles().size();k++){
+        for(int k=getComponentCount();k<joueur.getInventaire().getCles().size();k++){
             ajouterCarte(joueur.getInventaire().getCles().get(k));
+        }
+
+        for(int k=getComponentCount();k<joueur.getInventaire().getTresors().size();k++){
+            addTreasure(new Tresor(joueur.getInventaire().getTresors().get(k)));
         }
 
 

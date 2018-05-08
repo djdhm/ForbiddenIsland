@@ -49,16 +49,18 @@ public class Graphiques {
                 "",
             },  {
                 "./res/images/zones/Howling Garden@2x.png",
-                "./res/images/zones/Fools' Landing@2x.png",
                 "./res/images/zones/Temple of the Sun@2x.png",
-                "./res/images/zones/Breakers Bridge@2x.png",
-                "./res/images/zones/Breakers Bridge@2x.png",
-                "./res/images/zones/Breakers Bridge@2x.png"
+                "./res/images/zones/Temple of the Sun@2x.png",
+            "./res/images/zones/Fools' Landing@2x.png",
+            "./res/images/zones/Observatory@2x.png",
+                "./res/images/zones/Bronze Gate@2x.png",
+                "./res/images/zones/Bronze Gate@2x.png",
+
             },  {
                 "./res/images/zones/Breakers Bridge@2x.png",
-                "./res/images/zones/Breakers Bridge@2x.png",
-                "./res/images/zones/Breakers Bridge@2x.png",
-                "./res/images/zones/Breakers Bridge@2x.png",
+                "./res/images/zones/Cave of Embers@2x.png",
+                "./res/images/zones/Crimson Forest@2x.png",
+                "./res/images/zones/Crimson Forest@2x.png",
                 "./res/images/zones/Breakers Bridge@2x.png",
                 "./res/images/zones/Breakers Bridge@2x.png"
             },  {
@@ -88,14 +90,15 @@ public class Graphiques {
             },  {
             "./res/images/zones/Coral Palace_flood@2x.png",
             "./res/images/zones/Crimson Forest_flood@2x.png",
+            "./res/images/zones/Crimson Forest_flood@2x.png",
             "./res/images/zones/Dunes of Deception_flood@2x.png",
-            "./res/images/zones/Fools' Landing_flood@2x.png",
             "./res/images/zones/Breakers Bridge_flood@2x.png",
             "./res/images/zones/Breakers Bridge_flood@2x.png"
     },  {
             "./res/images/zones/Gold Gate_flood@2x.png",
             "./res/images/zones/Breakers Bridge_flood@2x.png",
             "./res/images/zones/Breakers Bridge_flood@2x.png",
+            "./res/images/zones/Fools' Landing_flood@2x.png",
             "./res/images/zones/Breakers Bridge_flood@2x.png",
             "./res/images/zones/Breakers Bridge_flood@2x.png",
             "./res/images/zones/Breakers Bridge_flood@2x.png"

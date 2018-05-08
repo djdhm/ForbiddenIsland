@@ -1,5 +1,7 @@
 package Models;
 
+import Exceptions.NoyadeException;
+
 public class CarteZone implements  Carte {
     private Zone zone;
 
@@ -8,7 +10,7 @@ public class CarteZone implements  Carte {
     }
 
     @Override
-    public void effetCarte(Joueur joueur) {
+    public void effetCarte(Joueur joueur)  {
         System.out.println("Effectuer innondation de zone "+joueur.getPseudo());
         System.out.println("La zone precedemment"+zone.toString());
         zone.innoderZone();

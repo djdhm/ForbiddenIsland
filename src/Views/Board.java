@@ -92,19 +92,22 @@ public class Board extends  JPanel implements Observer {
         moveBtn.addActionListener(controller);
         JButton shoreUpBtn = new DregerButton("Assecher Zone");
         shoreUpBtn.addActionListener(controller);
-        JButton useCapacityBtn = new DregerButton("Utiliser sa capacité");
+      //  JButton useCapacityBtn = new DregerButton("Utiliser sa capacité");
         JButton discardCard = new DregerButton("Défausser une carte");
-        JButton invoque = new DregerButton("Récuperer un trésor");
+        JButton invoque = new DregerButton("Recuperer un tresor");
+        invoque.addActionListener(controller);
         JButton giveCard = new DregerButton("Donner une carte");
         JButton useCard = new DregerButton("Utiliser une carte");
+        JButton senvoler =new DregerButton("S'envoler ");
+        senvoler.addActionListener(controller);
         listAction=new JPanel(new GridLayout(8,1,2,2));
         listAction.add(endTurnBtn);
         listAction.add(discardCard);
-        listAction.add(invoque);
         listAction.add(moveBtn);
         listAction.add(shoreUpBtn);
-        listAction.add(useCapacityBtn);
-        listAction.add(giveCard);
+        listAction.add(invoque);
+        listAction.add(senvoler);
+
         est.add(listAction,BorderLayout.CENTER);
         //ajout des zone de cle
         //Ajout des zones D'informations (Tour et nombre Action ) et INFO
@@ -155,17 +158,12 @@ public class Board extends  JPanel implements Observer {
             cadreJoueur[i]=new InfoJoueur(contraintesGauche[i],contraintesHaut[i],listeJoueurs.get(i));
           //  listeJoueurs.get(i).getInventaire().addObserver(cadreJoueur[i]);
         }
-        cadreJoueur[0].ajouterCarte(new Cle(ElementArtefact.TERRE));
-//        info.ajouterCarte(new Cle(ElementArtefact.TERRE));
-//        info.ajouterCarte(new Cle(ElementArtefact.TERRE));
-//        info2.addTreasure(new Cle(ElementArtefact.EAU));
-//        info2.addTreasure(new Cle(ElementArtefact.FEU));
-//        info.addTreasure(new Cle(ElementArtefact.FEU));
+
         cadreJoueur[0].setBorder(Graphiques.ACTIVE_BORDER_SELECTED);
         ouest.add(cadreJoueur[0],BorderLayout.NORTH);
-        ouest.add(cadreJoueur[2],BorderLayout.SOUTH);
+        if(cadreJoueur[2]!=null) ouest.add(cadreJoueur[2],BorderLayout.SOUTH);
         est.add(cadreJoueur[1],BorderLayout.NORTH);
-        est.add(cadreJoueur[3],BorderLayout.SOUTH);
+        if(cadreJoueur[3]!=null) est.add(cadreJoueur[3],BorderLayout.SOUTH);
         for (int l=0;l<partie.getJoueurs().size();l++) {
             System.out.println(partie.getGrille().getZone(PositionDepart[l].width,PositionDepart[l].height));
             this.partie.getJoueurs().get(l).setPosition(partie.getGrille().getZone(PositionDepart[l].width,PositionDepart[l].height));
@@ -183,15 +181,18 @@ public class Board extends  JPanel implements Observer {
     @Override
     public void update() {
         // Mise a jour de l'affichage de la fenetre de la partie
-        System.out.println("Saha");
-        this.infoJeu.setText("Il vous reste "+this.partie.getNombreAction()+" A jouer !");
-        this.tour.setText("Tour de Joueur : "+this.partie.getNomJoueurActuel());
+
+        this.infoJeu.setText("Il vous reste "+this.partie.getNombreAction()+" A jouer !   ");
+        this.tour.setText("Tour de Joueur : "+this.partie.getNomJoueurActuel()+"     ");
         boolean resteActionTour=(this.partie.getNombreAction()!=0);
         listAction.getComponent(0).setEnabled(true);
         for(int k=1;k<listAction.getComponents().length;k++){
             listAction.getComponent(k).setEnabled(resteActionTour);
 
         }
+        listAction.getComponent(5).setEnabled(this.partie.getJoueurActuel().getPosition()  instanceof Heliport);
+        listAction.getComponent(4).setEnabled(this.partie.getJoueurActuel().getPosition() instanceof AssocieElement);
+
         // Recherche et coloriage des zones adjacentes a la case de joueur
         // Pour la selection
         Dimension dim;
@@ -206,5 +207,16 @@ public class Board extends  JPanel implements Observer {
 //        this.zone.positionnerJoueur(partie.getJoueurActuel(),pos.width,pos.height);
 
         repaint();
+    }
+
+    public void afficherMessageVictoire() {
+//        JOptionPane.showConfirmDialog(this,"Vous avez Gagne!!");
+        JOptionPane.showMessageDialog(this,"Vous avez Gagne la partie ! Bravo! :) ");
+        System.exit(0);
+    }
+
+    public void afficherMessagePerte() {
+        JOptionPane.showMessageDialog(this,"Vous avez Perdu :( :( ");
+        System.exit(0);
     }
 }

@@ -21,9 +21,11 @@ public class Grille extends Observable   {
             }
         }
 
-        zones[2][1]=new Heliport();
+        zones[2][3]=new Heliport();
+        zones[2][3].setSituationZone(EtatZone.NORMAL);
+        System.out.println("Situation Heliport:"+zones[2][3].getSituationZone());
         zones[0][3]=new Zone();
-        zones[5][2]=new Zone();
+        zones[5][2]=new AssocieElement(Artefact.getArtefactElement(ElementArtefact.TERRE));
         zones[5][3]=new Zone();
         zones[2][0]=new Zone();
         zones[2][5]=new Zone();
@@ -44,7 +46,7 @@ public class Grille extends Observable   {
 
     }
     public Zone getHeliport(){
-        return zones[2][2];
+        return zones[2][3];
     }
 
     public ArrayList<Zone> getZoneAdjacentes(Zone zone){

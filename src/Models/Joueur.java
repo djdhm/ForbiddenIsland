@@ -31,7 +31,6 @@ public class Joueur extends Observable {
     }
     public void recevoirTresor(ElementArtefact elementArtefact){
         inventaire.ajouterTresor(elementArtefact);
-        notifyObservers();
     }
     public void monteEau(){
         position.innoderZone();
@@ -79,11 +78,13 @@ public class Joueur extends Observable {
     public boolean avoirToutesCles(Artefact element) {
         int cpt=0;
             for(Cle cle:inventaire.getCles()   ){
-                if(cle.getElementCle().equals(element))
+
+                if(cle.getElementCle().equals(element.getElement()))
                 {
                     cpt++;
                 }
             }
-            return cpt==4;
+            System.out.println("Vous avez "+cpt+" cles");
+            return cpt>=4;
     }
 }

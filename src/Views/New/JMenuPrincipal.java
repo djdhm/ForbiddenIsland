@@ -64,8 +64,9 @@ public class JMenuPrincipal extends JPanel {
         card.add(grid, "main");
         jouer = new DregerButton("jouer");
         grid.add(jouer);
-        option = new DregerButton("option");
-        grid.add(option);
+
+       // option = new DregerButton("option");
+       // grid.add(option);
       //  score = new JButton("scores");
      //   grid.add(score);
         tuto = new DregerButton("tutoriel");
@@ -86,6 +87,8 @@ public class JMenuPrincipal extends JPanel {
 
         titreLabel = new JLabel("L'Ile Interdite");
         titre.add(titreLabel);
+        grid.add(quitter);
+
     }
 
 
@@ -98,18 +101,9 @@ public class JMenuPrincipal extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(jouer)) {
+                    menuPrincipal.afficherPlateau();
 
-                    ((CardLayout) (card.getLayout())).show(card, JEU);
-
-                } else if (e.getSource().equals(option)) {
-
-                    ((CardLayout) (card.getLayout())).show(card, OPTION);
-
-                } else if (e.getSource().equals(score)) {
-
-                    ((CardLayout) (card.getLayout())).show(card, SCORES);
-
-                } else if (e.getSource().equals(tuto)) {
+                }else if (e.getSource().equals(tuto)) {
 
                     menuPrincipal.afficherTutorial();
                 } else if (e.getSource().equals(quitter)) {
@@ -123,7 +117,7 @@ public class JMenuPrincipal extends JPanel {
 
 
         jouer.addActionListener(listener);
-        option.addActionListener(listener);
+//        option.addActionListener(listener);
 //        score.addActionListener(listener);
         tuto.addActionListener(listener);
         quitter.addActionListener(listener);

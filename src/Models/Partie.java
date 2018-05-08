@@ -5,9 +5,12 @@ import javafx.geometry.Pos;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Partie extends Observable {
 
+    private HashMap<ElementArtefact ,Boolean> tresorTrouve;
+    private int cpt=0;
     static Dimension PositionDepart[]={
         new Dimension(2,2),
         new Dimension(4,4),
@@ -27,6 +30,7 @@ public class Partie extends Observable {
         this.joueurs=joueurs;
         this.actionRestantes=3;
         this.grille=grille;
+        tresorTrouve=new HashMap<ElementArtefact, Boolean>();
 
         this.paquqetCarteCle=new PaquetRechercheCle();
         this.paquetCarteZone=new PaquetCarteZone();
@@ -34,17 +38,20 @@ public class Partie extends Observable {
     }
     public Partie(ArrayList<Joueur> joueurs){
         grille=new Grille();
+        tresorTrouve=new HashMap<ElementArtefact, Boolean>();
+
         this.joueurs= joueurs;
         this.joueurActuel=this.joueurs.get(0);
-        joueurActuel.recevoirCle(new Cle(ElementArtefact.FEU));
         this.paquqetCarteCle=new PaquetRechercheCle();
         this.paquetCarteZone=new PaquetCarteZone();
 
     }
     public void initialiserPartie(){
         grille.initialiserGrille();
+
         paquetCarteZone.initialisationPaquet(this);
         paquqetCarteCle.initialisationPaquet(this);
+        joueursEnvoles=new ArrayList<>();
 
         joueurActuel=joueurs.get(0);
         this.actionRestantes=3;
@@ -60,24 +67,47 @@ public class Partie extends Observable {
         }
         this.actionRestantes=3;
         joueurActuel.setTour(false);
+        cpt=0;
         joueurActuel=joueurs.get((joueurs.indexOf(joueurActuel)+1)%joueurs.size());
+
+        while (joueurActuel.getPosition().getSituationZone().equals(EtatZone.SUBMERGEE) && joueurs.size()>0){
+            joueurActuel=joueurs.get((joueurs.indexOf(joueurActuel)+1)%joueurs.size());
+            joueurs.remove(joueurActuel);
+            cpt++;
+        }
+
+
         joueurActuel.setTour(true);
         joueurActuel.getInventaire().ajouterCle(new Cle(ElementArtefact.FEU));
         notifyObservers();
     }
 
     public boolean partieGagne(){
-        return  joueurs.size()==joueursEnvoles.size();
+        for (ElementArtefact element :ElementArtefact.values()
+             ) {
+            if(!tresorTrouve.containsKey(ElementArtefact.AIR)){
+                return false;
+            }
+
+        }
+
+        return  joueurs.size()==joueursEnvoles.size() ;
+
     }
     public boolean partiePerdu(){
         if(grille.getHeliport().getSituationZone()==EtatZone.SUBMERGEE){
 
             return true;
+
         }
         if(joueurs.size()==0){
             return  true;
         }
+        if(cpt==3) return true;
         return false;
+    }
+    public void noyerJoueur(Joueur j){
+        this.joueursEnvoles.remove(j);
     }
 
     public  Grille getGrille(){
@@ -156,5 +186,12 @@ public class Partie extends Observable {
 
     public PaquetRechercheCle getPaquqetCarteCle() {
         return paquqetCarteCle;
+    }
+
+    public void envolerJoueur(Joueur x) {
+        joueurs.remove(x);
+        joueursEnvoles.add(x);
+        notifyObservers();
+
     }
 }

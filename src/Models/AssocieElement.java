@@ -13,5 +13,12 @@ public class AssocieElement extends Zone {
         return element;
     }
 
+    public void recupererTresor(Joueur joueur){
+        joueur.recevoirTresor(element.getElement());
+        element=null;
+
+        notifyObservers();
+
+    }
 
 }

@@ -33,8 +33,6 @@ public class PaquetCarteZone extends  PaquetCarte{
         this.ajouterCarte(carteZone);
           carteZone=new CarteZone(grille.getZone(3,5));
         this.ajouterCarte(carteZone);
-        grille.getZone(2,3).innoderZone();
-        grille.getHeliport().innoderZone();
         this.melangerPaquet();
 
     }

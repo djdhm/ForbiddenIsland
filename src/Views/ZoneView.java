@@ -102,7 +102,7 @@ public class ZoneView extends JPanel implements Observer{
     public void retirerJoueur(Joueur j ,int x,int y){
         if(x>0 && y>0){
             listeZones[x][y].retirerJoueur(j);
-            System.out.println("Kayen le joueur");
+            System.out.println("Y a un joueur");
 
         }
     }

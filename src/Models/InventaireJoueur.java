@@ -12,6 +12,7 @@ public class InventaireJoueur  extends Observable{
 
     public InventaireJoueur(){
         cles=new ArrayList<>();
+        tresors=new ArrayList<>();
     }
 
     public void ajouterCle( Cle cle ){

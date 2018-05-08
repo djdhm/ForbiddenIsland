@@ -1,5 +1,6 @@
 package Models;
 
+import Exceptions.NoyadeException;
 import TP.Observable;
 import Views.New.Graphiques;
 
@@ -25,7 +26,7 @@ public class Zone extends Observable{
         notifyObservers();
     }
 
-    public void innoderZone(){
+    public void innoderZone() {
        situationZone=situationZone.getSuivant();
        notifyObservers();
     }
