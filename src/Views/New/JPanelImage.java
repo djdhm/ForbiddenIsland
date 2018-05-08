@@ -106,6 +106,14 @@ public class JPanelImage extends JPanel implements Observer {
 
     @Override
     public void update() {
+        this.joueurs.removeAll(this.joueurs);
+        for (Joueur k:
+             zone.getJoueurs()) {
+            this.joueurs.add(k);
+            System.out.println("Ajout des joueurs");
+        };
+
+        System.out.println("Affichage de la zone a nouveau");
         repaint();
     }
 

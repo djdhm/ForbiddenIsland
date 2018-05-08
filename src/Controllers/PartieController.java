@@ -26,7 +26,7 @@ public class PartieController implements ActionListener {
     }
     public Partie initialiserPartie(ArrayList<Joueur> joueurs){
         partie.initialiserPartie();
-        zoneView=new ZoneView();
+        zoneView=new ZoneView(this.partie);
         zoneView.loadZones(partie.getGrille());
         return partie;
     }
@@ -56,14 +56,17 @@ public class PartieController implements ActionListener {
 
         switch (source){
             case "FIN DE TOUR":
-                System.out.println("Fin tour de jouer ");
+                System.out.println("Fin tour de jouer ...");
                 this.partie.tourSuivant();
             break;
             case "SE DEPLACER":
-                System.out.println("Se deplacer");
+                System.out.println("Se deplacer...");
                 this.partie.decNombreAction();
-                this.partie.getJoueurActuel().setPosition(partie.getGrille().getZone(3,3));
+                this.partie.entourerZoneDeplacement();
                 break;
+            case "ASSECHER ZONE":
+                System.out.println("Assecher une zone ...");
+                this.partie.entourerZoneAssecher();
         }
     }
 }

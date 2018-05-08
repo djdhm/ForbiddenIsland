@@ -14,13 +14,15 @@ import java.util.ArrayList;
 
 public class ZoneView extends JPanel implements Observer{
 
+    private  Partie partie;
     private Grille zones;
     private boolean isSelected;
     private MouseListener mouseListener;
     private GridLayout grille=new GridLayout(6,6,10,10);
     private JPanelImage[][] listeZones;
-    public ZoneView(){
+    public ZoneView(Partie partie){
         super();
+        this.partie=partie;
         this.setLayout(grille);
         listeZones=new JPanelImage[6][6];
         Dimension taille=new Dimension(660,660);
@@ -38,12 +40,13 @@ public class ZoneView extends JPanel implements Observer{
                 zone=grille.getZone(i,j);
                 if(zone!=null){
                     zone.addObserver(this);
+
                     JPanelImage image=new JPanelImage(zone,zone.getImageSituation(i,j));
                     if(zone instanceof AssocieElement){
                         image.setArtefact(((AssocieElement) zone).getElement());
                     }
                     listeZones[i][j]=image;
-                    new ZoneController(image,zone);
+                    new ZoneController(image,zone,partie);
                     this.add(image);
                 }else{
                     this.add(new JPanel());
@@ -82,9 +85,9 @@ public class ZoneView extends JPanel implements Observer{
 
     @Override
     public void update() {
-        this.removeAll();
+       // this.removeAll();
         System.out.println("Mise a jour des images ");
-        this.loadZones(zones);
+//        this.loadZones(zones);
     }
 
     public boolean isSelected() {
@@ -98,4 +101,8 @@ public class ZoneView extends JPanel implements Observer{
     public void setMouseListener(MouseListener mouseListener) {
         this.mouseListener = mouseListener;
     }
+    public void setPartie(Partie partie){
+        this.partie=partie;
+    }
+
 }

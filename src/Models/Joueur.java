@@ -41,8 +41,14 @@ public class Joueur extends Observable {
         return position;
     }
     public void setPosition(Zone position){
-        this.anciennePosition=this.position;
+
+        if(this.position!=null){
+            System.out.println("Retirer le joueur de la case precedente");
+            this.position.removeJoueur(this);
+        }
         this.position=position;
+        System.out.println("Affichage dans la case arrivé");
+        this.position.ajouterJoueur(this);
         notifyObservers();
     }
 

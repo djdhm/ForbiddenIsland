@@ -15,10 +15,11 @@ public class ZoneController implements ActionListener,MouseListener{
     Partie partie;
     JPanelImage vue;
     Zone zone;
-
-    public ZoneController(JPanelImage vue,Zone zone ){
+    public ZoneController(JPanelImage vue,Zone zone ,Partie partie){
         this.zone=zone;
         this.vue =vue;
+        this.partie=partie;
+        zone.addObserver(vue);
         this.vue.ajouterListenerSouris(this);
     }
 
@@ -36,13 +37,24 @@ public class ZoneController implements ActionListener,MouseListener{
         System.out.println("Salam Alikoum");
         if(e.getSource() instanceof JPanelImage){
             JPanelImage z= (JPanelImage) e.getSource();
-            if(zone.getTypeSelection()==1){
-                for (Zone adjacente:
-                        partie.getGrille().getZoneAdjacentes(zone)) {
-                    adjacente.setTypeSelection(0);
+            switch (zone.getTypeSelection()){
+//                for (Zone adjacente:
+//                        partie.getGrille().getZoneAdjacentes(zone)) {
+//                    adjacente.setTypeSelection(0);
+//
+//                }
+                case 1:
+                    this.partie.deselectionnerZone();
+                     System.out.println("Pour deplacement");
+                     System.out.println(partie);
+                     this.partie.getJoueurActuel().setPosition(zone);
+                break;
+                case 2:
+                    System.out.println("Pour Assechement");
+                break;
 
-                }
             }
+
 //            switch (z.getTypeSelection()){
 //                case 1:
 //                    System.out.println("Clique pour deplacement");

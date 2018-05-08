@@ -12,7 +12,7 @@ public class Partie extends Observable {
         new Dimension(2,2),
         new Dimension(4,4),
         new Dimension(1,3),
-        new Dimension(0,4)
+        new Dimension(4,4)
     };
     int actionRestantes;
     Grille grille;
@@ -45,6 +45,7 @@ public class Partie extends Observable {
         paquetCarteZone.initialisationPaquet();
         paquqetCarteCle.initialisationPaquet();
         for (int i=0;i<this.joueurs.size();i++) {
+            System.out.println(grille.getZone(PositionDepart[i].width,PositionDepart[i].height));
             joueurs.get(i).setPosition(grille.getZone(PositionDepart[i].width,PositionDepart[i].height));
         }
 
@@ -114,5 +115,31 @@ public class Partie extends Observable {
     public void decNombreAction(){
         this.actionRestantes--;
         notifyObservers();
+    }
+
+    public void entourerZoneAssecher(){
+        for(Zone z:grille.getZoneAdjacentes(joueurActuel.getPosition())){
+            if(z.getSituationZone().equals(EtatZone.INNONDE)){
+                z.setTypeSelection(2);
+            }else{
+                z.setTypeSelection(0);
+            }
+        }
+    }
+    public  void deselectionnerZone(){
+        for(Zone z:grille.getZoneAdjacentes(joueurActuel.getPosition())){
+                z.setTypeSelection(0);
+        }
+    }
+
+    public void entourerZoneDeplacement() {
+        for(Zone z:grille.getZoneAdjacentes(joueurActuel.getPosition())){
+            if(!z.getSituationZone().equals(EtatZone.SUBMERGEE)){
+                z.setTypeSelection(1);
+            }
+            else{
+                z.setTypeSelection(0);
+            }
+        }
     }
 }

@@ -49,10 +49,10 @@ public class Grille extends Observable  {
     public ArrayList<Zone> getZoneAdjacentes(Zone zone){
             ArrayList<Zone> zonesAdjacentes =new ArrayList<>();
             Dimension position=chercherZone(zone);
-            if(position.width>0) zonesAdjacentes.add(zones[position.width-1][position.height]);
-            if(position.width<5) zonesAdjacentes.add(zones[position.width+1][position.height]);
-            if(position.height>0) zonesAdjacentes.add(zones[position.width][position.height-1]);
-            if(position.width<5) zonesAdjacentes.add(zones[position.width][position.height+1]);
+            if(zones[position.width-1][position.height]!=null) zonesAdjacentes.add(zones[position.width-1][position.height]);
+            if(zones[position.width+1][position.height]!=null) zonesAdjacentes.add(zones[position.width+1][position.height]);
+            if(zones[position.width][position.height-1]!=null) zonesAdjacentes.add(zones[position.width][position.height-1]);
+            if(zones[position.width][position.height+1]!=null) zonesAdjacentes.add(zones[position.width][position.height+1]);
 
             return zonesAdjacentes;
 

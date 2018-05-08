@@ -3,11 +3,15 @@ package Models;
 import TP.Observable;
 import Views.New.Graphiques;
 
+import java.util.ArrayList;
+
 public class Zone extends Observable{
 
+    private ArrayList<Joueur> joueurs;
     private EtatZone situationZone;
     private int typeSelection;
     public Zone(){
+        joueurs=new ArrayList<>();
         this.situationZone= EtatZone.NORMAL;
         this.typeSelection=0;
     }
@@ -36,6 +40,15 @@ public class Zone extends Observable{
         notifyObservers();
     }
 
+    public void removeJoueur(Joueur j){
+        this.joueurs.remove(j);
+        notifyObservers();
+    }
+    public void ajouterJoueur(Joueur j){
+        this.joueurs.add(j);
+        notifyObservers();
+
+    }
     public String getImageSituation(int i,int j){
         // Affichage de la zone en etat normal
         if(situationZone.equals(EtatZone.NORMAL)){
@@ -62,5 +75,10 @@ public class Zone extends Observable{
 
     public void setTypeSelection(int typeSelection) {
         this.typeSelection = typeSelection;
+        notifyObservers();
+    }
+
+    public ArrayList<Joueur> getJoueurs() {
+        return joueurs;
     }
 }

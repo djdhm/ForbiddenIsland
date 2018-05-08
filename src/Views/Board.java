@@ -62,7 +62,7 @@ public class Board extends  JPanel implements Observer {
         est = new JPanel(new BorderLayout());
         sud=new JPanel(new BorderLayout());
         nord=new JPanel(new GridLayout(2,1,5,5));
-        zone=new ZoneView();
+        zone=new ZoneView(this.partie);
 
         VuePaquets =new JPanel(new GridLayout(2,1,15,0));
 
@@ -83,7 +83,8 @@ public class Board extends  JPanel implements Observer {
         endTurnBtn.addActionListener(controller);
         JButton moveBtn = new DregerButton("Se deplacer");
         moveBtn.addActionListener(controller);
-        JButton shoreUpBtn = new DregerButton("Assécher un endroit");
+        JButton shoreUpBtn = new DregerButton("Assecher Zone");
+        shoreUpBtn.addActionListener(controller);
         JButton useCapacityBtn = new DregerButton("Utiliser sa capacité");
         JButton discardCard = new DregerButton("Défausser une carte");
         JButton invoque = new DregerButton("Récuperer un trésor");
@@ -113,10 +114,12 @@ public class Board extends  JPanel implements Observer {
 
     public void initialiserPartie(Partie partie){
             this.partie=partie;
+            this.zone.setPartie(partie);
              controller=new PartieController(partie,this);
              initAffichage();
             partie.initialiserPartie();
             zone.loadZones(partie.getGrille());
+            ajouterJoueurs();
     }
     private void initialiserPaquet(){
         VuePaquets.add(new VuePaquet(new PaquetCarteZone()));
