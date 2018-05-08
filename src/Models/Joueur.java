@@ -30,6 +30,7 @@ public class Joueur extends Observable {
 
     }
     public void recevoirTresor(ElementArtefact elementArtefact){
+        inventaire.supprimer(elementArtefact);
         inventaire.ajouterTresor(elementArtefact);
     }
     public void monteEau(){

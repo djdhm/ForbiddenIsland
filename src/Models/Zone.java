@@ -1,6 +1,5 @@
 package Models;
 
-import Exceptions.NoyadeException;
 import TP.Observable;
 import Views.New.Graphiques;
 
@@ -28,6 +27,9 @@ public class Zone extends Observable{
 
     public void innoderZone() {
        situationZone=situationZone.getSuivant();
+       if(situationZone.equals(EtatZone.SUBMERGEE)){
+           joueurs=new ArrayList<>();
+       }
        notifyObservers();
     }
 
@@ -53,14 +55,19 @@ public class Zone extends Observable{
     }
     public String getImageSituation(int i,int j){
         // Affichage de la zone en etat normal
-        if(situationZone.equals(EtatZone.NORMAL)){
-            return Graphiques.ImageZone[i][j];
-        }
-        else if(situationZone.equals(EtatZone.INNONDE)){
-            return Graphiques.ImageZoneInnonder[i][j];
-        }
+       if(situationZone!=null){
+           if(situationZone.equals(EtatZone.NORMAL)){
+               return Graphiques.ImageZone[i][j];
+           }
+           else if(situationZone.equals(EtatZone.INNONDE)){
+               return Graphiques.ImageZoneInnonder[i][j];
+           }else{
+               return "./res/images/zones/extra/Tile_Flood_Water@2x.png";
+
+           }
+       }
         else{
-            return "./res/images/zones/extra/Tile_Flood_Water@2x.png";
+           return "./res/images/zones/extra/Tile_Flood_Water@2x.png";
         }
     }
 

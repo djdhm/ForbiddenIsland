@@ -36,4 +36,11 @@ public class InventaireJoueur  extends Observable{
     public ArrayList<ElementArtefact> getTresors() {
         return tresors;
     }
+
+    public void supprimer(ElementArtefact elementArtefact) {
+        this.getCles().removeIf(cle -> {
+            return cle.getElementCle().equals(elementArtefact);
+        });
+        notifyObservers();
+    }
 }

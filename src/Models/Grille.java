@@ -56,7 +56,11 @@ public class Grille extends Observable   {
             if(zones[position.width+1][position.height]!=null) zonesAdjacentes.add(zones[position.width+1][position.height]);
             if(zones[position.width][position.height-1]!=null) zonesAdjacentes.add(zones[position.width][position.height-1]);
             if(zones[position.width][position.height+1]!=null) zonesAdjacentes.add(zones[position.width][position.height+1]);
-
+            zonesAdjacentes.removeIf(zone1 ->
+                    {
+                        return zone1.getSituationZone().equals(EtatZone.SUBMERGEE);
+                    }
+            );
             return zonesAdjacentes;
 
     }

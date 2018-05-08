@@ -3,6 +3,7 @@ package Models;
 import TP.Observable;
 import javafx.geometry.Pos;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +60,18 @@ public class Partie extends Observable {
     }
 
     public void  tourSuivant(){
+        for (Joueur j:joueurs
+             ) {
+            if(j.getPosition().getSituationZone().equals(EtatZone.SUBMERGEE)){
+
+                ArrayList<Zone> zonesfuites=this.grille.getZoneAdjacentes(joueurActuel.getPosition());
+                if(zonesfuites.size()!=0){
+                    j.setPosition(zonesfuites.get(0));
+                }
+            }else{
+
+            }
+        }
         for(Zone e:        grille.getZoneAdjacentes(joueurActuel.getPosition())){
             System.out.println("Changement d'etat de la celule vers non selectionne"+e);
             if(e!=null){
