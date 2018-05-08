@@ -82,6 +82,7 @@ public class PartieController implements ActionListener {
                 if(j.avoirToutesCles(elementArtefact)){
                     ((AssocieElement)j.getPosition()).recupererTresor(j);
                     System.out.println("Vous avez recuperer le tresor");
+                    partie.ajouterTresor(elementArtefact);
 
                 }else{
                     System.out.println("Vous avez pas les cles necessaire");

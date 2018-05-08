@@ -207,4 +207,11 @@ public class Partie extends Observable {
         notifyObservers();
 
     }
+
+    public void ajouterTresor(Artefact elementArtefact) {
+           if(tresorTrouve.get(elementArtefact)==null){
+               tresorTrouve.put(elementArtefact.getElement(),new Boolean(true));
+           }
+         
+    }
 }
