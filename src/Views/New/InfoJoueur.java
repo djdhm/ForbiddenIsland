@@ -38,6 +38,8 @@ public class InfoJoueur extends JPanel implements Observer {
         joueur.getInventaire().addObserver(this);
         initLayout();
         initTreasures();
+        addTreasure(joueur.getId());
+
     }
 
 
@@ -210,7 +212,6 @@ public class InfoJoueur extends JPanel implements Observer {
         for(int k=getComponentCount();k<joueur.getInventaire().getCles().size();k++){
             ajouterCarte(joueur.getInventaire().getCles().get(k));
         }
-        addTreasure(joueur.getId());
 
 
 
