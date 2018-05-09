@@ -37,7 +37,7 @@ public abstract class PaquetCarte extends Observable {
         Collections.shuffle(cartes);
     }
 
-    private void poserDansDefausse(Carte carte){
+    public void poserDansDefausse(Carte carte){
 
         defausse.push(carte)       ;
 

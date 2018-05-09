@@ -4,6 +4,7 @@ import Models.*;
 import Views.New.Graphiques;
 import Views.New.JPanelImage;
 import Views.New.VuePaquet;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -52,8 +53,16 @@ public class PaquetController  {
                     System.out.println("Vous avez fini");
                     partie.selectionnerCarteCle();
                 }
-                cartesZone.tirerCarte().effetCarte(partie.getJoueurActuel());
-
+                CarteZone carte=(CarteZone)cartesZone.tirerCarte();
+              //  JOptionPane.showMessageDialog(paquetVue,"Vous avez tirer une carte "+carte.toString());
+                if(carte.aDefausser()){
+                    partie.getPaquetCarteZone().poserDansDefausse(carte);
+                }else{
+                    carte.effetCarte(partie.getJoueurActuel());
+                }
+                if(partie.partiePerdu()){
+                    partie.tourSuivant();
+                }
             }
 
         }
@@ -84,9 +93,15 @@ public class PaquetController  {
         public void mouseClicked(MouseEvent e) {
             System.out.println("Je dois retirer une carte cle");
             if(partie.getPaquqetCarteCle().getNombreCarteARetirer()>0){
-                Carte carte = partie.getPaquqetCarteCle().tirerCarte();
-                carte.effetCarte(partie.getJoueurActuel());
+                //Carte carte = partie.getPaquqetCarteCle().tirerCarte();
+                //carte.effetCarte(partie.getJoueurActuel());
 
+                Carte carte=partie.getPaquqetCarteCle().tirerCarte();
+                JOptionPane.showMessageDialog(paquetVue,"Vous avez tirer une carte "+carte.toString());
+                carte.effetCarte(partie.getJoueurActuel());
+                if(partie.partiePerdu()){
+                    partie.notifyObservers();
+                }
                 if(partie.getPaquqetCarteCle().getNombreCarteARetirer()==0){
                     partie.tourSuivant();
                 }

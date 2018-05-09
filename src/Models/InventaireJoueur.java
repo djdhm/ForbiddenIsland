@@ -24,8 +24,10 @@ public class InventaireJoueur  extends Observable{
         this.tresors.add(elementArtefact);
         notifyObservers();
     }
-    public void retirerCle(Cle cle){
-        this.cles.remove(cle);
+    public void retirerCle(ElementArtefact elementArtefact){
+        cles.removeIf(cle -> {
+           return cle.getElementCle().equals(elementArtefact);
+        });
         notifyObservers();
     }
 

@@ -96,15 +96,9 @@ public class ZoneView extends JPanel implements Observer{
 
 
     public void positionnerJoueur(Joueur j,int x,int y){
-            listeZones[x][y].ajouterJoueur(j);
-    }
 
-    public void retirerJoueur(Joueur j ,int x,int y){
-        if(x>0 && y>0){
-            listeZones[x][y].retirerJoueur(j);
-            System.out.println("Y a un joueur");
+        listeZones[x][y].ajouterJoueur(j);
 
-        }
     }
 
 
@@ -116,13 +110,7 @@ public class ZoneView extends JPanel implements Observer{
         //repaint();
     }
 
-    public boolean isSelected() {
-        return isSelected;
-    }
 
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
 
     public void setMouseListener(MouseListener mouseListener) {
         this.mouseListener = mouseListener;

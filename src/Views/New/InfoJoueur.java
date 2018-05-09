@@ -141,6 +141,12 @@ public class InfoJoueur extends JPanel implements Observer {
         treasure.add(new JPanelImage(Graphiques.Pions[num]), gLCT);
     }
 
+    public void miseAjour(){
+        System.out.println("Ceci est une mise a jour");
+        this.removeAll();
+        initTreasures();
+        addTreasure(joueur.getId());
+    }
     @Override
     public Dimension getPreferredSize() {
         return new Dimension((int)(1000* 0.3), (int) (1000 * 0.1));
@@ -151,10 +157,11 @@ public class InfoJoueur extends JPanel implements Observer {
         System.out.println("Mise a jour de info joueur");
         System.out.println("Nombre de composants :"+getComponents().length);
 
+        miseAjour();
+        cles=new ArrayList<>();
         for(int k=getComponentCount();k<joueur.getInventaire().getCles().size();k++){
             ajouterCarte(joueur.getInventaire().getCles().get(k));
         }
-
 
 
         if(joueur.isTour()){

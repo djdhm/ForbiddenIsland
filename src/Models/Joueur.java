@@ -76,16 +76,21 @@ public class Joueur extends Observable {
         return inventaire;
     }
 
-    public boolean avoirToutesCles(Artefact element) {
+    public boolean avoirToutesCles(ElementArtefact element) {
         int cpt=0;
             for(Cle cle:inventaire.getCles()   ){
 
-                if(cle.getElementCle().equals(element.getElement()))
+                if(cle.getElementCle().equals(element))
                 {
                     cpt++;
                 }
             }
             System.out.println("Vous avez "+cpt+" cles");
             return cpt>=4;
+    }
+
+    public void retirerCle(ElementArtefact elementArtefact) {
+        this.inventaire.retirerCle(elementArtefact);
+        notifyObservers();
     }
 }

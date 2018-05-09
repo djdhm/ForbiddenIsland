@@ -1,7 +1,6 @@
 
 package Views.New;
 import java.awt.Color;
-import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;

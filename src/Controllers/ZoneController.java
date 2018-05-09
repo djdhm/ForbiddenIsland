@@ -5,6 +5,7 @@ import Models.Partie;
 import Models.Zone;
 import Views.New.JPanelImage;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -34,7 +35,6 @@ public class ZoneController implements ActionListener,MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        System.out.println("Salam Alikoum");
         if(e.getSource() instanceof JPanelImage){
             JPanelImage z= (JPanelImage) e.getSource();
             switch (zone.getTypeSelection()){
@@ -48,11 +48,13 @@ public class ZoneController implements ActionListener,MouseListener{
                     System.out.println("Pour deplacement");
                      System.out.println(partie);
                      this.partie.getJoueurActuel().setPosition(zone);
+                     this.partie.deselectionnerZone();
                      this.partie.decNombreAction();
-                    break;
+                     break;
                 case 2:
                     System.out.println("Pour Assechement");
                     zone.assecherZone();
+                    this.partie.deselectionnerZone();
                     this.partie.decNombreAction();
                 break;
 

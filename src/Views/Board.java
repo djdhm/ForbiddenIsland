@@ -97,7 +97,6 @@ public class Board extends  JPanel implements Observer {
         JButton shoreUpBtn = new DregerButton("Assecher Zone");
         shoreUpBtn.addActionListener(controller);
       //  JButton useCapacityBtn = new DregerButton("Utiliser sa capacité");
-        JButton discardCard = new DregerButton("Défausser une carte");
         JButton invoque = new DregerButton("Recuperer un tresor");
         invoque.addActionListener(controller);
         JButton giveCard = new DregerButton("Donner une carte");
@@ -106,7 +105,6 @@ public class Board extends  JPanel implements Observer {
         senvoler.addActionListener(controller);
         listAction=new JPanel(new GridLayout(8,1,2,2));
         listAction.add(endTurnBtn);
-        listAction.add(discardCard);
         listAction.add(moveBtn);
         listAction.add(shoreUpBtn);
         listAction.add(invoque);
@@ -161,7 +159,7 @@ public class Board extends  JPanel implements Observer {
         int i;
         for(i=0;i<listeJoueurs.size()&&i<4;i++){
             cadreJoueur[i]=new InfoJoueur(contraintesGauche[i],contraintesHaut[i],listeJoueurs.get(i));
-          //  listeJoueurs.get(i).getInventaire().addObserver(cadreJoueur[i]);
+            listeJoueurs.get(i).getInventaire().addObserver(cadreJoueur[i]);
         }
 
         cadreJoueur[0].setBorder(Graphiques.ACTIVE_BORDER_SELECTED);
@@ -187,6 +185,11 @@ public class Board extends  JPanel implements Observer {
     public void update() {
         // Mise a jour de l'affichage de la fenetre de la partie
 
+
+        if(partie.partiePerdu()){
+            afficherMessagePerte();
+
+        }
         this.infoTresor.setText("Vous avez rassemblez  "+this.partie.getNombreTresors() + " Tresors Jusqu'a maintenant");
         this.infoJeu.setText("Il vous reste "+this.partie.getNombreAction()+" A jouer !   ");
         this.tour.setText("Tour de Joueur : "+this.partie.getNomJoueurActuel()+"     ");
@@ -196,15 +199,17 @@ public class Board extends  JPanel implements Observer {
             listAction.getComponent(k).setEnabled(resteActionTour);
 
         }
-        listAction.getComponent(5).setEnabled(this.partie.getJoueurActuel().getPosition()  instanceof Heliport);
-        listAction.getComponent(4).setEnabled(this.partie.getJoueurActuel().getPosition() instanceof AssocieElement);
+        listAction.getComponent(4).setEnabled(this.partie.getJoueurActuel().getPosition()  instanceof Heliport);
+        listAction.getComponent(3).setEnabled(this.partie.getJoueurActuel().getPosition() instanceof AssocieElement);
 
         // Recherche et coloriage des zones adjacentes a la case de joueur
         // Pour la selection
         Dimension dim;
-        for (Zone z:this.partie.getGrille().getZoneAdjacentes(this.partie.getJoueurActuel().getPosition())
-             ) {
-            z.setTypeSelection(1);
+        if(partie.getNombreAction()>0){
+            for (Zone z:this.partie.getGrille().getZoneAdjacentes(this.partie.getJoueurActuel().getPosition())
+                    ) {
+                z.setTypeSelection(1);
+            }
         }
 //        Dimension pos=this.partie.getGrille().chercherZone(this.partie.getJoueurActuel().getPosition());
 //        Dimension ancienPos=this.partie.getGrille().chercherZone(this.partie.getJoueurActuel().getAnciennePosition());

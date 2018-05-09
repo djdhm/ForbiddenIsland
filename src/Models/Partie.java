@@ -2,6 +2,7 @@ package Models;
 
 import TP.Observable;
 import javafx.geometry.Pos;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,6 +60,7 @@ public class Partie extends Observable {
 
     }
 
+
     public void  tourSuivant(){
         for (Joueur j:joueurs
              ) {
@@ -78,6 +80,7 @@ public class Partie extends Observable {
                 e.setTypeSelection(0);
             }
         }
+
         this.actionRestantes=3;
         joueurActuel.setTour(false);
         cpt=0;
@@ -91,7 +94,6 @@ public class Partie extends Observable {
 
 
         joueurActuel.setTour(true);
-        joueurActuel.getInventaire().ajouterCle(new Cle(ElementArtefact.FEU));
         notifyObservers();
     }
 
@@ -109,9 +111,7 @@ public class Partie extends Observable {
     }
     public boolean partiePerdu(){
         if(grille.getHeliport().getSituationZone()==EtatZone.SUBMERGEE){
-
             return true;
-
         }
         if(joueurs.size()==0){
             return  true;
@@ -119,8 +119,17 @@ public class Partie extends Observable {
         if(cpt==3) return true;
         return false;
     }
+
+    public void fuirZoneInnonde(Joueur joueur){
+      ArrayList<Zone> listeZone = grille.getZoneAdjacentes(joueur.getPosition());
+      if(listeZone.size()>0){
+          joueur.setPosition(listeZone.get(0));
+      }
+    }
+
     public void noyerJoueur(Joueur j){
-        this.joueursEnvoles.remove(j);
+        this.joueurs.remove(j);
+        notifyObservers();
     }
 
     public  Grille getGrille(){
@@ -128,10 +137,10 @@ public class Partie extends Observable {
     }
 
     public void  deplacerJoueur(Joueur j,int x,int y){
-
         j.setPosition(grille.getZone(x,y));
-
-
+        if(actionRestantes==0){
+            deselectionnerZone();
+        }
     }
 
     public ArrayList<Joueur> getJoueurs() {
@@ -156,7 +165,6 @@ public class Partie extends Observable {
     }
     public void decNombreAction(){
         this.actionRestantes--;
-
         notifyObservers();
     }
 
@@ -173,15 +181,18 @@ public class Partie extends Observable {
         for(Zone z:grille.getZoneAdjacentes(joueurActuel.getPosition())){
                 z.setTypeSelection(0);
         }
+
     }
 
     public void entourerZoneDeplacement() {
-        for(Zone z:grille.getZoneAdjacentes(joueurActuel.getPosition())){
-            if(!z.getSituationZone().equals(EtatZone.SUBMERGEE)){
-                z.setTypeSelection(1);
-            }
-            else{
-                z.setTypeSelection(0);
+        if(actionRestantes>0){
+            for(Zone z:grille.getZoneAdjacentes(joueurActuel.getPosition())){
+                if(!z.getSituationZone().equals(EtatZone.SUBMERGEE)){
+                    z.setTypeSelection(1);
+                }
+                else{
+                    z.setTypeSelection(0);
+                }
             }
         }
     }
@@ -204,15 +215,15 @@ public class Partie extends Observable {
     public void envolerJoueur(Joueur x) {
         joueurs.remove(x);
         joueursEnvoles.add(x);
+        x.setPosition(null);
         notifyObservers();
-
     }
 
     public void ajouterTresor(Artefact elementArtefact) {
            if(tresorTrouve.get(elementArtefact)==null){
                tresorTrouve.put(elementArtefact.getElement(),new Boolean(true));
            }
-
+            notifyObservers();
     }
 
     public int getNombreTresors() {

@@ -26,9 +26,10 @@ public class Zone extends Observable{
     }
 
     public void innoderZone() {
-       situationZone=situationZone.getSuivant();
        if(situationZone.equals(EtatZone.SUBMERGEE)){
            joueurs=new ArrayList<>();
+       }else {
+           situationZone=situationZone.getSuivant();
        }
        notifyObservers();
     }

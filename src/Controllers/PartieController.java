@@ -6,6 +6,7 @@ import Views.New.CleView;
 import Views.New.DregerButton;
 import Views.ZoneView;
 
+import javax.swing.*;
 import javax.swing.text.View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,19 +45,18 @@ public class PartieController implements ActionListener {
 
     }
     public void innonderZone(int x,int y){
+
         zoneView.innonderZone(x,y);
+        if(partie.partiePerdu()){
+            plateau.afficherMessagePerte();
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String source=((DregerButton)e.getSource()).getText();
         System.out.println(source);
-        if(partie.partieGagne()){
-                plateau.afficherMessageVictoire();
-        }
-        else if(partie.partiePerdu()){
-                plateau.afficherMessagePerte();
-        }
+
 
         switch (source){
 
@@ -70,22 +70,31 @@ public class PartieController implements ActionListener {
             case "SE DEPLACER":
                 System.out.println("Se deplacer...");
                 this.partie.entourerZoneDeplacement();
+
                 break;
             case "ASSECHER ZONE":
                 System.out.println("Assecher une zone ...");
                 this.partie.entourerZoneAssecher();
+                this.partie.getJoueurActuel().recevoirCle(new Cle(ElementArtefact.FEU));
+                this.partie.getJoueurActuel().recevoirCle(new Cle(ElementArtefact.FEU));
+                this.partie.getJoueurActuel().recevoirCle(new Cle(ElementArtefact.FEU));
+                this.partie.getJoueurActuel().recevoirCle(new Cle(ElementArtefact.FEU));
+                this.partie.getJoueurActuel().recevoirCle(new Cle(ElementArtefact.FEU));
                 break;
             case "RECUPERER UN TRESOR":
                 System.out.println("Recuperer un tresor ...");
                 Joueur j=this.partie.getJoueurActuel();
                 Artefact elementArtefact=((AssocieElement)j.getPosition()).getElement();
-                if(j.avoirToutesCles(elementArtefact)){
+                if(j.avoirToutesCles(elementArtefact.getElement())){
                     ((AssocieElement)j.getPosition()).recupererTresor(j);
                     System.out.println("Vous avez recuperer le tresor");
+                    partie.getJoueurActuel().retirerCle(elementArtefact.getElement());
                     partie.ajouterTresor(elementArtefact);
+                    JOptionPane.showMessageDialog(zoneView,"Vous avez recupere le tresor de type"+elementArtefact.getElementArtefact());
 
                 }else{
                     System.out.println("Vous avez pas les cles necessaire");
+                    JOptionPane.showMessageDialog(zoneView,"Vous n'avez pas assez de cles pour recuperer ce Tresor ");
                 }
                     break;
             case "S'ENVOLER":
@@ -96,8 +105,14 @@ public class PartieController implements ActionListener {
                     partie.envolerJoueur(x);
                     this.partie.tourSuivant();
                     this.partie.deselectionnerZone();
+                    JOptionPane.showMessageDialog(zoneView,"Vous vous etes enfuis de l'ile !!");
 
+
+                    if(partie.partieGagne()){
+                        plateau.afficherMessageVictoire();
+                    }
                 }
+
                 break;
 
         }

@@ -20,6 +20,10 @@ public class CarteZone implements  Carte {
         }
     }
 
+    public boolean aDefausser(){
+        return this.zone.equals(EtatZone.SUBMERGEE);
+
+    }
     public Zone getZone() {
         return zone;
     }
