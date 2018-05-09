@@ -159,7 +159,7 @@ public class InfoJoueur extends JPanel implements Observer {
 
         miseAjour();
         cles=new ArrayList<>();
-        for(int k=getComponentCount();k<joueur.getInventaire().getCles().size();k++){
+        for(int k=0;k<joueur.getInventaire().getCles().size();k++){
             ajouterCarte(joueur.getInventaire().getCles().get(k));
         }
 

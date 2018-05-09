@@ -75,11 +75,6 @@ public class PartieController implements ActionListener {
             case "ASSECHER ZONE":
                 System.out.println("Assecher une zone ...");
                 this.partie.entourerZoneAssecher();
-                this.partie.getJoueurActuel().recevoirCle(new Cle(ElementArtefact.FEU));
-                this.partie.getJoueurActuel().recevoirCle(new Cle(ElementArtefact.FEU));
-                this.partie.getJoueurActuel().recevoirCle(new Cle(ElementArtefact.FEU));
-                this.partie.getJoueurActuel().recevoirCle(new Cle(ElementArtefact.FEU));
-                this.partie.getJoueurActuel().recevoirCle(new Cle(ElementArtefact.FEU));
                 break;
             case "RECUPERER UN TRESOR":
                 System.out.println("Recuperer un tresor ...");
